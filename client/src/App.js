@@ -40,8 +40,8 @@ function App() {
        <Route exact path='/saved' element={< />} />
        <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
      </Routes> */}
-   </Router>
-</ApolloProvider>
+    </Router>
+    </ApolloProvider>   
 
   );
 }
