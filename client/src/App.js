@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-import CreateQuiz from "./pages/CreateQuiz";
+import CreateQuiz from "./pages/RenderQuiz";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
