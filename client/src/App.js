@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 //import './index.css';
 import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink} from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import { setContext } from '@apollo/client/link/context';
@@ -31,17 +31,17 @@ const client = new ApolloClient({
 
 function App() {
   return (
-   
-    <ApolloProvider  client ={client}>
-    <Router>
-     <Navbar />
-     {/* <Routes>
+
+    <ApolloProvider client={client}>
+      <Router>
+        <Navbar />
+        {/* <Routes>
        <Route exact path='/' element={</>} />
        <Route exact path='/saved' element={< />} />
        <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
      </Routes> */}
-   </Router>
-</ApolloProvider>
+      </Router>
+    </ApolloProvider>
 
   );
 }
