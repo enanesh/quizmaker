@@ -11,12 +11,12 @@ const AppSection = () => {
 
             <dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
                 <div class="border-t border-gray-200 pt-4">
-                <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Take a quiz</button>
+                <a href="/quizes" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Take a quiz</a>
                 </div>
             </dl>
             </div>
             <div class="grid grid-cols-1 grid-rows-1 gap-4 sm:gap-6 lg:gap-8">
-            <img src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-04.jpg" alt="Walnut card tray filled with cards and card angled in dedicated groove." class="rounded-lg bg-gray-100"></img>
+            <img src="./mainPageImage.png" alt="Walnut card tray filled with cards and card angled in dedicated groove." class="rounded-lg"></img>
             </div>
         </div>
         </div>

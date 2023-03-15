@@ -4,7 +4,8 @@ import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink} from '@apollo/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Section from './components/Section';
+import Section from './components/pages/Section';
+import Quizes from './components/pages/Quizes';
 import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
@@ -36,12 +37,11 @@ function App() {
     <ApolloProvider  client ={client}>
     <Router>
      <Navbar />
-     <Section />
-     {/* <Routes>
-       <Route exact path='/' element={</>} />
-       <Route exact path='/saved' element={< />} />
-       <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
-     </Routes> */}
+     <Routes>
+       <Route exact path='/' element={<Section/>} />
+       <Route exact path='/quizes' element={<Quizes />} />
+       {/* <Route render={() => <h1 className='display-2'>Wrong page!</h1>} /> */}
+     </Routes>
     </Router>
     </ApolloProvider>   
 
