@@ -9,6 +9,7 @@ import RenderQuiz from "./pages/RenderQuiz";
 import { setContext } from "@apollo/client/link/context";
 import SingUp from "./components/SignUp";
 import SignUp from "./components/SignUp";
+import PasswordForm from "./components/PasswordForm";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -37,7 +38,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Navbar />
-        <SignUp />
+        <PasswordForm />
         {/* <Section /> */}
         <Routes>
           {/* <Route exact path='/' element={</>} />
