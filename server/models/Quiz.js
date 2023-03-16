@@ -17,6 +17,10 @@ const quizSchema = new Schema({
             ref: 'Question',
         },
     ],
+    student: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
 });
 
 

@@ -11,7 +11,7 @@ import Profile from './components/pages/Profile';
 import Renderquiz from './components/pages/Renderquiz';
 import { setContext } from "@apollo/client/link/context";
 import Dashboard from "./components/Dashboard";
-import Quizes from './components/pages/Quizes';
+import Quizes from "./components/pages/Quizes";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -37,7 +37,7 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <div class >
+  
     <ApolloProvider  client ={client}>
     <Router>
      <Navbar />
@@ -50,7 +50,6 @@ function App() {
      </Routes>
     </Router>
     </ApolloProvider>   
-    </div>
 
   );
 }
