@@ -31,6 +31,10 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  //image field is only for image link, PDF, PDN, etc. isn't allowed
+  image: {
+    type: String,
+  },
 });
 
 userSchema.pre('save', async function (next) {

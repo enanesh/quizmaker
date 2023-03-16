@@ -6,6 +6,9 @@ module.exports = {
       backgroundImage: {
         'confetti': "url('/assets/confettiBg.png')",
       },
+      fontFamily: {
+        signature: ["Caveat"],
+      }
      
 
     },

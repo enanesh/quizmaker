@@ -4,12 +4,13 @@ import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Section from "./components/Section";
 import SignUp from "./components/SignUp";
+import Section from "./components/pages/Section";
 import RenderQuiz from "./pages/RenderQuiz";
 import BuildQuiz from "./pages/BuildQuiz";
 import { setContext } from "@apollo/client/link/context";
 import Dashboard from "./components/Dashboard";
+import Quizes from "./components/pages/Quizes";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -38,14 +39,11 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Navbar />
-        <SignUp />
-        {/* <Section /> */}
         <Routes>
-          {/* <Route exact path='/' element={</>} />
-       <Route exact path='/saved' element={< />} />
-       <Route render={() => <h1 className='display-2'>Wrong page!</h1>} /> */}
-          <Route path="/quiz" element={<RenderQuiz />} />
-          <Route path="/build" element={<BuildQuiz />} />
+          <Route exact path="/" element={<Section />} />
+          <Route exact path="/quizes" element={<Quizes />} />
+          {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
+          {/* <Route path="/build" element={<BuildQuiz />} /> */}
         </Routes>
       </Router>
     </ApolloProvider>
