@@ -5,11 +5,12 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@ap
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SignUp from "./components/SignUp";
-import Section from './components/pages/Section';
+import Section from "./components/pages/Section";
 import RenderQuiz from "./pages/RenderQuiz";
+import BuildQuiz from "./pages/BuildQuiz";
 import { setContext } from "@apollo/client/link/context";
 import Dashboard from "./components/Dashboard";
-import Quizes from './components/pages/Quizes';
+import Quizes from "./components/pages/Quizes";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -33,21 +34,19 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 function App() {
   return (
-   
-    <ApolloProvider  client ={client}>
-    <Router>
-     <Navbar />
-     <Routes>
-       <Route exact path='/' element={<Section/>} />
-       <Route exact path='/quizes' element={<Quizes />} />
-       {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
-     </Routes>
-    </Router>
-    </ApolloProvider>   
-
+    <ApolloProvider client={client}>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Section />} />
+          <Route exact path="/quizes" element={<Quizes />} />
+          {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
+          {/* <Route path="/build" element={<BuildQuiz />} /> */}
+        </Routes>
+      </Router>
+    </ApolloProvider>
   );
 }
 
