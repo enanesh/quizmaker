@@ -1,24 +1,28 @@
 // import logo from './logo.svg';
 //import './index.css';
-import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink} from '@apollo/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import { setContext } from '@apollo/client/link/context';
+import React from "react";
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import SignUp from "./components/SignUp";
+import Section from './components/pages/Section';
+import RenderQuiz from "./pages/RenderQuiz";
+import { setContext } from "@apollo/client/link/context";
+import Dashboard from "./components/Dashboard";
+import Quizes from './components/pages/Quizes';
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
-
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -35,11 +39,11 @@ function App() {
     <ApolloProvider  client ={client}>
     <Router>
      <Navbar />
-     {/* <Routes>
-       <Route exact path='/' element={</>} />
-       <Route exact path='/saved' element={< />} />
-       <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
-     </Routes> */}
+     <Routes>
+       <Route exact path='/' element={<Section/>} />
+       <Route exact path='/quizes' element={<Quizes />} />
+       {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
+     </Routes>
     </Router>
     </ApolloProvider>   
 
