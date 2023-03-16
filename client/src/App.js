@@ -5,11 +5,11 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@ap
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Section from "./components/Section";
+import SignUp from "./components/SignUp";
 import RenderQuiz from "./pages/RenderQuiz";
 import { setContext } from "@apollo/client/link/context";
-import SingUp from "./components/SignUp";
-import SignUp from "./components/SignUp";
-import PasswordForm from "./components/PasswordForm";
+import Dashboard from "./components/Dashboard";
+
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -38,7 +38,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Navbar />
-        <PasswordForm />
+        <SignUp />
         {/* <Section /> */}
         <Routes>
           {/* <Route exact path='/' element={</>} />
