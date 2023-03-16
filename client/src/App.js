@@ -7,9 +7,9 @@ import Navbar from "./components/Navbar";
 import Section from "./components/Section";
 import SignUp from "./components/SignUp";
 import RenderQuiz from "./pages/RenderQuiz";
+import BuildQuiz from "./pages/BuildQuiz";
 import { setContext } from "@apollo/client/link/context";
 import Dashboard from "./components/Dashboard";
-
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -45,6 +45,7 @@ function App() {
        <Route exact path='/saved' element={< />} />
        <Route render={() => <h1 className='display-2'>Wrong page!</h1>} /> */}
           <Route path="/quiz" element={<RenderQuiz />} />
+          <Route path="/build" element={<BuildQuiz />} />
         </Routes>
       </Router>
     </ApolloProvider>
