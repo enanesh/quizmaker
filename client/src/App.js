@@ -1,12 +1,14 @@
 // import logo from './logo.svg';
 //import './index.css';
-import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink} from '@apollo/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import React from "react";
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import SignUp from "./components/SignUp";
 import Section from './components/pages/Section';
-import { setContext } from '@apollo/client/link/context';
 import RenderQuiz from "./pages/RenderQuiz";
+import { setContext } from "@apollo/client/link/context";
+import Dashboard from "./components/Dashboard";
 import Quizes from './components/pages/Quizes';
 
 const httpLink = createHttpLink({
