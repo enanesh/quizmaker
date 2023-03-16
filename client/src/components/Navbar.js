@@ -10,7 +10,7 @@ const AppNavbar = () => {
                 <img src="./logo.png" class="h-6 mr-3 sm:h-9" alt="Logo" />
                 <ul class="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-md md:font-medium md:border-0">
                 <li>
-                <a href="/" class="block py-2 pl-3 pr-4 text-white-700 rounded hover:bg-white-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
+                            <a href="/" class="font-signature text-5xl  block py-2 pl-3 pr-4 text-white rounded hover:bg-white-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">quizMaker </a>
                 </li>
             </ul>
 
