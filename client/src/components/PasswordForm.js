@@ -12,9 +12,9 @@ const PasswordForm = () => {
             </h1>
 
             <div>
-  
-              <p>You'll receive a link to create a new password via email.</p>  
-              
+
+              <p>You'll receive a link to create a new password via email.</p>
+
             </div>
 
             <form class="space-y-6 md:space-y-6" action="#">
@@ -35,15 +35,15 @@ const PasswordForm = () => {
                 />
               </div>
 
-              
+
 
               <button
                 type="submit"
                 class="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                 Get a New Password
+                Get a New Password
               </button>
-              
+
             </form>
           </div>
         </div>

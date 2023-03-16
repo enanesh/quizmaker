@@ -12,6 +12,7 @@ import Renderquiz from './components/pages/Renderquiz';
 import { setContext } from "@apollo/client/link/context";
 import Dashboard from "./components/Dashboard";
 import Quizes from "./components/pages/Quizes";
+import Footer from "./components/Footer";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -46,12 +47,15 @@ function App() {
        <Route exact path='/quizes' element={<Quizes />} />
        <Route exact path='/profile' element={<Profile />} />
        <Route exact path='/renderquiz' element={<Renderquiz />} />
-       {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
-     </Routes>
+          {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
+          {/* <Route path="/build" element={<BuildQuiz />} /> */}
+        </Routes>
+        <Footer />
+
     </Router>
     </ApolloProvider>   
 
-  );
+ );
 }
 
 export default App;
