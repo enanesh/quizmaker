@@ -6,7 +6,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SignUp from "./components/SignUp";
 import Section from './components/pages/Section';
-import RenderQuiz from "./pages/RenderQuiz";
+import Profile from './components/pages/Profile';
+//import RenderQuiz from "./pages/RenderQuiz";
+import Renderquiz from './components/pages/Renderquiz';
 import { setContext } from "@apollo/client/link/context";
 import Dashboard from "./components/Dashboard";
 import Quizes from './components/pages/Quizes';
@@ -35,17 +37,20 @@ const client = new ApolloClient({
 
 function App() {
   return (
-   
+    <div class >
     <ApolloProvider  client ={client}>
     <Router>
      <Navbar />
      <Routes>
        <Route exact path='/' element={<Section/>} />
        <Route exact path='/quizes' element={<Quizes />} />
+       <Route exact path='/profile' element={<Profile />} />
+       <Route exact path='/renderquiz' element={<Renderquiz />} />
        {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
      </Routes>
     </Router>
     </ApolloProvider>   
+    </div>
 
   );
 }
