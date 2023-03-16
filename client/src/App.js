@@ -38,24 +38,27 @@ const client = new ApolloClient({
 
 function App() {
   return (
-  
-    <ApolloProvider  client ={client}>
-    <Router>
-     <Navbar />
-     <Routes>
-       <Route exact path='/' element={<Section/>} />
-       <Route exact path='/quizes' element={<Quizes />} />
-       <Route exact path='/profile' element={<Profile />} />
-       <Route exact path='/renderquiz' element={<Renderquiz />} />
+
+    <ApolloProvider client={client}>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route exact path='/' element={<Section />} />
+          <Route exact path='/quizes' element={<Quizes />} />
+          <Route exact path='/profile' element={<Profile />} />
+          <Route exact path='/renderquiz' element={<Renderquiz />} />
+          <Route exact path='/signup' element={<SignUp />} />
+
+
           {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
           {/* <Route path="/build" element={<BuildQuiz />} /> */}
         </Routes>
         <Footer />
 
-    </Router>
-    </ApolloProvider>   
+      </Router>
+    </ApolloProvider>
 
- );
+  );
 }
 
 export default App;
