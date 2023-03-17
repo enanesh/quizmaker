@@ -1,10 +1,252 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Product, Category, Order } = require("../models");
+const { Answer, Category, Question, Quiz, QuizUser, User } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
+    // find quiz by ID with all data
+    // PROFILE/Quiz
+    // PROFILE/Take a quiz: select quiz from the list
+    getQuizById: async (parent, { quizid }) => {
+      const quiz = await Quiz.findOne({ _id: quizid });
+      if (!quiz) {
+        throw new Error('Quiz not found');
+      }
+      return quiz;
+    },
 
+    // find questions related to quiz by quiz ID
+    // Map to display questions by quiz id 
+    getQuestionsByQuizId: async (parent, { quizid }) => {
+      return Quiz.findOne({ _id: quizid }).populate('question');
+    },
+
+    // get all quizzes
+    // DASHBOARD: Map first 6 quizes to display in feeder
+    getAllQuizzes: async () => {
+      return Quiz.find({});
+    },
+
+    // get all quizzes by Owner
+    // PROFILE/Created by you
+    getAllQuizzesByOwner: async (parent, { ownerid }) => {
+      const quizzes = await Quiz.find({owner: ownerid});
+      if (quizzes.length === 0) {
+        throw new Error(`No quizzes are owned by user ${ownerid}`);
+      }
+      return quizzes;
+    },
+
+    // get all quizzes
+    // PROFILE/Assigned to you
+    getAllQuizzesByStudent: async (parent, { studentid }) => {
+      const quizzes = await Quiz.find({student: studentid});
+      if (quizzes.length === 0) {
+        throw new Error(`No quizzes assigned to student with id ${studentid}`);
+      }
+      return quizzes;
+    },
+
+    // Get answers to display
+    getAnswersByQuizId: async (parent, { quizId }) => {
+      const answers = await Answer.find({ quizId }).populate('questionId').populate('userId');
+      return answers;
+    },
+
+    // get user data
+    // PROFILE/Profile settings
+    getMyProfile: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+        return user;
+      }
+      throw new Error('Not logged in!');
+    },
+
+    // FORGET PASSWORD page
+    getUserByUserNameOrEmail: async (parent, { username, email }) => {
+      const user = await User.findOne({$or: [{ username: username }, { email: email }] });
+      if (!user) {
+        throw new Error('User not found');
+      }
+      return user;
+    },
+
+  },
+  Mutation: {
+    // SIGN UP page
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
+    },
+    // LOGIN page
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new Error("Can't find user with that email!");
+      }
+      const correctPw = await user.isCorrectPassword(password);
+      if (!correctPw) {
+        throw new Error('Incorrect password!');
+      }
+      const token = signToken(user);
+      return { token, user };
+    },
+    // PROFILE/Create a quiz (1)
+    createQuiz: async (parent, { quizData }, context) => {
+      // Check if user is logged in
+      if (!context.user) {
+        throw new Error('You need to be logged in to create a quiz!');
+      }
+    
+      // Create new quiz document
+      const newQuiz = new Quiz({
+        title: quizData.title,
+        description: quizData.description,
+        owner: context.user._id,
+        questions: quizData.questions,
+      });
+    
+      // Find category by ID and push new quiz to quizzes array
+      const updatedCategory = await Category.findOneAndUpdate(
+        { _id: quizData.category },
+        { $push: { quizzes: newQuiz } },
+        { new: true }
+      );
+    
+      // Save new quiz document
+      await newQuiz.save();
+    
+      return newQuiz;
+    },
+
+    // update quiz if user is owner
+    updateQuiz: async (parent, { quizId, title }, { user }) => {
+      if (!user) {
+        throw new Error("Unauthorized");
+      }
+
+      const quiz = await Quiz.findById(quizId);
+
+      if (!quiz) {
+        throw new Error("Quiz not found");
+      }
+
+      if (quiz.owner.toString() !== user.id) {
+        throw new Error("You are not the owner of this quiz");
+      }
+
+      quiz.title = title;
+
+      const updatedQuiz = await quiz.save();
+
+      return updatedQuiz;
+    },
+
+    // create Question and push to Quiz
+    // PROFILE/Create a quiz (question)
+    createQuestion: async (parent, { quizid, questionData }, context) => {
+      if (!context.user) {
+        throw new Error('You must be logged in to create a question');
+      }
+    
+      // Create the new question
+      const newQuestion = await Question.create({
+        ...questionData,
+        owner: context.user._id
+      });
+    
+      // Add the new question to the quiz's `question` array
+      const updatedQuiz = await Quiz.findOneAndUpdate(
+        { _id: quizid, owner: context.user._id },
+        { $push: { question: newQuestion._id } },
+        { new: true }
+      ).populate('question');
+    
+      if (!updatedQuiz) {
+        throw new Error('Quiz not found or you do not have permission to update it');
+      }
+    
+      return updatedQuiz;
+    },
+
+    // Update question
+    updateQuestion: async (parent, { questionId, updatedQuestionData }, context) => {
+      // Check if the user is logged in and has permission to update the question.
+      if (!context.user) {
+        throw new Error('You must be logged in to update a question.');
+      }
+    
+      const question = await Question.findById(questionId);
+    
+      if (!question) {
+        throw new Error('Question not found.');
+      }
+    
+      // Update the question data with the new values.
+      // Object.assign is for update the properties of an existing object without having to create a new object from scratch
+      Object.assign(question, updatedQuestionData);
+    
+      // Save the updated question.
+      const updatedQuestion = await question.save();
+    
+      return updatedQuestion;
+    },
+
+    // Save Answer
+    saveAnswer: async (parent, { answerData }, context) => {
+      // Check if user is authenticated
+      if (!context.user) {
+        throw new Error('You need to be logged in!');
+      }
+    
+      const { questionId, selectedAnswer, isCorrect } = answerData;
+    
+      // Create new answer document
+      const newAnswer = new Answer({
+        questionId,
+        userId: context.user._id,
+        selectedanswer: selectedAnswer,
+        isCorrect,
+      });
+    
+      // Save answer to database
+      const savedAnswer = await newAnswer.save();
+    
+      // Return saved answer document
+      return savedAnswer;
+    },
+
+    // DELETE Quiz
+    deleteQuiz: async (parent, { quizId }, context) => {
+      if (context.user) {
+        const quiz = await Quiz.findById(quizId);
+        if (!quiz) {
+          throw new Error('Quiz not found');
+        }
+        if (quiz.student.toString() !== context.user._id.toString()) {
+          throw new Error('You are not authorized to delete this quiz');
+        }
+        await Quiz.findByIdAndDelete(quizId);
+        return 'Quiz deleted successfully';
+      }
+      throw new Error('You need to be logged in!');
+    },
+
+    // DEELETE Question
+    deleteQuestion: async (parent, { questionId }, context) => {
+      if (context.user) {
+        const deletedQuestion = await Question.findOneAndDelete({
+          _id: questionId,
+        });
+        if (!deletedQuestion) {
+          throw new Error('Question not found!');
+        }
+        return deletedQuestion;
+      }
+      throw new Error('You need to be logged in!');
+    },
   },
 };
 

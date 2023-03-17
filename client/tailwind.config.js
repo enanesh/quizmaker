@@ -2,7 +2,21 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'confetti': "url('/assets/confettiBg.png')",
+      },
+      fontFamily: {
+        signature: ["Caveat"],
+      }
+     
+
+    },
   },
-  plugins: [],
+  plugins: [
+
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio')
+
+  ],
 }
