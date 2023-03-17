@@ -4,7 +4,7 @@ import { FaUserCheck } from "react-icons/fa";
 const Footer = () => {
     return (
 
-        <footer class="bg- bg-confetti dark:bg-gray-900">
+        <footer class="bg- bg-confetti mt-auto dark:bg-gray-900">
             <div class="mx-auto w-full container p-4 sm:p-6">
                 <div class="md:flex md:justify-between">
                     <div class="mb-6 md:mb-0">

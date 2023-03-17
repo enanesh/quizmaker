@@ -50,7 +50,7 @@ const options = [
 const AppProfile = () => {
     return (
       <div>
-        <div className='m-8'>
+        <div className='m-8 min-h-screen'>
           {/* <div className="md:grid md:grid-cols-3 md:gap-6"> */}
             {/* <div className="md:col-span-1 text-center">
               <div className="px-4 sm:px-0">
