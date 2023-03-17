@@ -38,11 +38,17 @@ const SignUp = () => {
                   border-gray-300 rounded-md"/>
                 </div>
                 <div class="relative">
-                  <a class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500
-                  rounded-lg transition duration-200 hover:bg-purple-600 ease">Submit</a>
+                  <button class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500
+                  rounded-lg transition duration-200 hover:bg-purple-600 ease">Submit</button>
                 </div>
+                <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                  Do you have an account already? <a href="#" class="font-medium text-indigo-600 hover:underline dark:text-primary-500">Login</a>
+                </p>
               </div>
             </div>
+
+
+
             <svg viewbox="0 0 91 91" class="absolute top-0 left-0 z-0 w-32 h-32 -mt-12 -ml-12 text-yellow-300
             fill-current"><g stroke="none" strokewidth="1" fillrule="evenodd"><g fillrule="nonzero"><g><g><circle
                 cx="3.261" cy="3.445" r="2.72" /><circle cx="15.296" cy="3.445" r="2.719" /><circle cx="27.333" cy="3.445"
