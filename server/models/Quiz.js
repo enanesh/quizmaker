@@ -7,6 +7,10 @@ const quizSchema = new Schema({
         unique: true,
         trim: true,
     },
+    createdAt: {
+        type: Date,
+        required: true
+    },
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User',

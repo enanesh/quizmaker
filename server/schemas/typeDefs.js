@@ -1,5 +1,7 @@
 const typeDefs = `#graphql
   type Query {
+  "Find your Users"
+    user: [User!]!
   "Get quiz array for homepage grid"
     homePageQuizes: [Quiz!]!
   }
@@ -8,17 +10,18 @@ const typeDefs = `#graphql
   type User {
     "Unique Identifier"
     _id: ID
+    "The name a user shows the world"
+    username: String!
     "First Name"
-    fName: String!
+    firstname: String!
     "Last Name"
-    lName: String!
+    lastname: String!
     "Email Address"
     email: String!
     "Hashed Password"
-    hashedPassword: String!
-    authKey: String!
-    "Quizes User Took"
-    quiz: [Quiz]
+    password: String!
+    "Quizzes Completed"
+    completedquizes: [CompletedQuizes]
   }
 
   "Oh look! A Quiz!!"
@@ -28,17 +31,21 @@ const typeDefs = `#graphql
     "When was this made?"
     createdAt: String!
     "Quiz Creator"
-    creatorID: User!
+    owner: String!
     "Questions"
-    questions: [Question!]!
-    ""
+    questions: Question!
+    "How did they do??"
     results: [Results]
   }
 
   type Question {
-    title: String!
+    questiontext: String!
     answers: [String!]!
     correctAnswers: [String!]!
+  }
+
+  type CompletedQuizes {
+    quiz: [Quiz]
 
   }
 
