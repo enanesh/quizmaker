@@ -39,10 +39,10 @@ const SignUp = () => {
                 </div>
                 <div class="relative">
                   <button class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500
-                  rounded-lg transition duration-200 hover:bg-purple-600 ease">Submit</button>
+                  rounded-lg transition duration-200 hover:bg-purple-600 ease">Sign Up</button>
                 </div>
                 <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Do you have an account already? <a href="#" class="font-medium text-indigo-600 hover:underline dark:text-primary-500">Login</a>
+                  Do you have an account already? <a href="/login" class="font-medium text-indigo-600 hover:underline dark:text-primary-500">Login</a>
                 </p>
               </div>
             </div>
