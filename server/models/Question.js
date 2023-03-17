@@ -15,12 +15,14 @@ const questionSchema = new Schema({
             trim: true,
         },
     ],
-    correctanswer: {
+    correctanswer: [
+        {
         type: String,
         required: true,
         unique: true,
         trim: true,
-    },
+        },
+    ],
     questiontype: {
         type: String,
         required: true,
