@@ -13,7 +13,7 @@ const options = [
     {
       id: 2,
       name: 'Take a quiz',
-      href: '/quiz',
+      href: '/quizes',
       imageSrc: './take.png',
       imageAlt: 'Take a quiz',
     },
