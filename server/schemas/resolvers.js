@@ -68,7 +68,25 @@ const resolvers = {
 
   },
   Mutation: {
-
+    // SIGN UP page
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
+    },
+    // LOGIN page
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new Error("Can't find user with that email!");
+      }
+      const correctPw = await user.isCorrectPassword(password);
+      if (!correctPw) {
+        throw new Error('Incorrect password!');
+      }
+      const token = signToken(user);
+      return { token, user };
+    },
   },
 };
 
