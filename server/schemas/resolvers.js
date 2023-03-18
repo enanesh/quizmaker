@@ -71,12 +71,14 @@ const resolvers = {
       }
       return user;
     },
-
+    users: async () => {
+      return User.find();
+    },
   },
   Mutation: {
     // SIGN UP page
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, { username, firstname, lastname, email, password }) => {
+      const user = await User.create({ username,firstname, lastname, email, password });
       const token = signToken(user);
       return { token, user };
     },
