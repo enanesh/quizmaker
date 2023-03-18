@@ -46,13 +46,13 @@ function App() {
           <Route exact path='/' element={<Section />} />
           <Route exact path='/quizes' element={<Quizes />} />
           <Route exact path='/profile' element={<Profile />} />
-          <Route exact path='/renderquiz' element={<Renderquiz />} />
+          {/* <Route exact path='/renderquiz' element={<Renderquiz />} /> */}
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/login' element={<Login />} />
 
 
-          {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
-          {/* <Route path="/build" element={<BuildQuiz />} /> */}
+          <Route path="/quiz" element={<RenderQuiz />} />
+          <Route path="/build" element={<BuildQuiz />} />
         </Routes>
         <Footer />
       </Router>

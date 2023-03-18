@@ -62,6 +62,7 @@ const CreateQuestion = (props) => {
               </select>
 
               <input className="form-input" placeholder="question text:" name="title" type="text" onChange={handleChange} />
+              {/* TODO: handle change is creating multiple entries if you edit an answer */}
               <input className="form-input" placeholder="choice 1:" name="choices" type="text" onChange={handleChange} />
               <input className="form-input" placeholder="choice 2:" name="choices" type="text" onChange={handleChange} />
               <input className="form-input" placeholder="choice 3:" name="choices" type="text" onChange={handleChange} />
