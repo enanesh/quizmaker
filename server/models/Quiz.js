@@ -1,32 +1,32 @@
 const { Schema, model } = require('mongoose');
 
 const quizSchema = new Schema({
-    title: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-    },
-    createdAt: {
-        type: Date,
-        required: true
-    },
-    owner: {
+  title: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
+  createdAt: {
+    type: Date,
+    // required: true
+  },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+},
+question: [
+    {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Question',
     },
-    question: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Question',
-        },
-    ],
-    student: [
-        {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        },
-    ],
+],
+student: [
+    {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    },
+],
 });
 
 
