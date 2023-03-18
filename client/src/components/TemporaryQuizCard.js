@@ -1,71 +1,83 @@
-// import React, { useState } from "react";
+import React, { useState, Arry } from "react";
 
-// import { useMutation } from "@apollo/client";
-// import { ADD_QUESTION } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+import { ADD_QUESTION } from "../utils/mutations";
 
-// const CreateQuestion = (props) => {
-//   const { onRemove, number } = props;
-//   const [formState, setFormState] = useState({
-//     type: "",
-//     name: "",
-//     title: "",
-//     isRequired: "",
-//     choices: [],
-//     correctAnswer: "",
-//   });
+const CreateQuestion = (props) => {
+  const { saveQuestion } = props;
+  const [currentQuestionState, setCurrentQuestionState] = useState({
+    type: "",
+    name: "",
+    title: "",
+    correctAnswer: "",
+    choices: [],
+  });
 
-//   const [addQuestion, { error, data }] = useMutation(ADD_QUESTION);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-//   const handleChange = (event) => {
-//     const { name, value } = event.target;
+    if (name === "choices") {
+      setCurrentQuestionState({
+        ...currentQuestionState,
+        choices: [...currentQuestionState.choices, value],
+      });
+    } else {
+      setCurrentQuestionState({
+        ...currentQuestionState,
+        [name]: value,
+      });
+    }
+  };
 
-//     setFormState({
-//       ...formState,
-//     });
-//   };
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    saveQuestion(currentQuestionState);
 
-//   const handleFormSubmit = async (event) => {
-//     event.preventDefault();
-//     console.log(formState);
+    // console.log(choicesState);
+    // console.log(currentQuestionState);
 
-//     try {
-//       const { data } = await addQuestion({
-//         variables: { ...formState },
-//       });
-//     } catch (e) {
-//       console.error(e);
-//     }
-//   };
+    // try {
+    //   const mutationResponse = await addQuestion({
+    //     variables: { type: currentQuestionState.questionType },
+    //   });
+    // } catch (e) {
+    //   console.error(e);
+    // }
+  };
 
-//   return (
-//     <main className="flex-row justify-center mb-4">
-//       <div className="col-12 col-lg-10">
-//         <div className="card">
-//           <div className="card-body">
-//             {data ? (
-//               <p>Question saved!</p>
-//             ) : (
-//               <form onSubmit={handleFormSubmit}>
-//                 <input className="form-input" placeholder="question name (no spaces):" name="name" type="text" value={formState.name} onChange={handleChange} />
-//                 <input className="form-input" placeholder="question text:" name="title" type="text" value={formState.text} onChange={handleChange} />
-//                 <input className="form-input" placeholder="choice 1:" name="choiceOne" type="text" value={formState.choiceOne} onChange={handleChange} />
-//                 <input className="form-input" placeholder="choice 2:" name="choiceTwo" type="text" value={formState.choiceTwo} onChange={handleChange} />
-//                 <input className="form-input" placeholder="choice 3:" name="choiceThree" type="text" value={formState.choiceThree} onChange={handleChange} />
-//                 <input className="form-input" placeholder="choice 4:" name="choiceFour" type="text" value={formState.choiceThree} onChange={handleChange} />
-//                 <input className="form-input" placeholder="correct answer:" name="choiceCorrect" type="text" value={formState.choiceCorrect} onChange={handleChange} />
-//                 <button style={{ cursor: "pointer" }} onClick={() => onRemove()}>
-//                   Remove
-//                 </button>
-//                 <button style={{ cursor: "pointer" }} type="submit">
-//                   Submit
-//                 </button>
-//               </form>
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//     </main>
-//   );
-// };
+  return (
+    <main className="flex-row justify-center mb-4">
+      <div className="col-12 col-lg-10">
+        <div className="card">
+          <div className="card-body">
+            <form onSubmit={handleFormSubmit}>
+              <input className="form-input" placeholder="question name (no spaces):" name="name" type="text" onChange={handleChange} />
+              <label for="type">question type:</label>
+              <select id="type" name="type" type="text" onChange={handleChange}>
+                <option value="" disabled selected hidden>
+                  Select type:
+                </option>
+                <option value="radiogroup">Single Select</option>
+                <option value="checkbox">Multi-Select</option>
+              </select>
 
-// export default CreateQuestion;
+              <input className="form-input" placeholder="question text:" name="title" type="text" onChange={handleChange} />
+              {/* TODO: handle change is creating multiple entries if you edit an answer */}
+              <input className="form-input" placeholder="choice 1:" name="choices" type="text" onChange={handleChange} />
+              <input className="form-input" placeholder="choice 2:" name="choices" type="text" onChange={handleChange} />
+              <input className="form-input" placeholder="choice 3:" name="choices" type="text" onChange={handleChange} />
+              <input className="form-input" placeholder="choice 4:" name="choices" type="text" onChange={handleChange} />
+              <input className="form-input" placeholder="correct answer:" name="correctAnswer" type="text" onChange={handleChange} />
+
+              <button style={{ cursor: "pointer" }} type="submit">
+                Save
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default CreateQuestion;
