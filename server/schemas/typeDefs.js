@@ -1,4 +1,9 @@
 const typeDefs = `#graphql
+  type Query {
+  "Get quiz array for homepage grid"
+    homePageQuizes: [Quiz!]!
+  }
+
   "Users that can take or make quizes"
   type User {
     "Unique Identifier"
@@ -20,17 +25,21 @@ const typeDefs = `#graphql
   type Quiz {
     "Quiz Identifier"
     quizID: ID!
-    "Quiz Creator"
+    "When was this made?"
     createdAt: String!
+    "Quiz Creator"
     creatorID: User!
     "Questions"
-    questions: Object!
-    "Possible Answers"
-    answers: Object!
-    "Correct Answer"
-    correctAnswers: Object!
+    questions: [Question!]!
     ""
     results: [Results]
+  }
+
+  type Question {
+    title: String!
+    answers: [String!]!
+    correctAnswers: [String!]!
+
   }
 
   "Lets see how you did."
@@ -41,7 +50,7 @@ const typeDefs = `#graphql
     "When did they turn in the quiz?"
     submittedTime: String!
     "The answers they submitted"
-    submittedAnswers: Object!
+    submittedAnswers: [String!]!
     "Percent correct"
     score: Float
   }

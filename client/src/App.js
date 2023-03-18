@@ -11,9 +11,9 @@ import RenderQuiz from "./pages/RenderQuiz";
 import BuildQuiz from "./pages/BuildQuiz";
 // import Renderquiz from "./components/pages/Renderquiz";
 import { setContext } from "@apollo/client/link/context";
-import Dashboard from "./components/Dashboard";
 import Quizes from "./components/pages/Quizes";
 import Footer from "./components/Footer";
+import Login from "./components/Login";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -43,13 +43,16 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route exact path="/" element={<Section />} />
-          <Route exact path="/quizes" element={<Quizes />} />
-          <Route exact path="/profile" element={<Profile />} />
-          {/* <Route exact path="/renderquiz" element={<Renderquiz />} /> */}
-          <Route exact path="/signup" element={<SignUp />} />
-          <Route path="/quiz" element={<RenderQuiz />} />
-          <Route path="/build" element={<BuildQuiz />} />
+          <Route exact path='/' element={<Section />} />
+          <Route exact path='/quizes' element={<Quizes />} />
+          <Route exact path='/profile' element={<Profile />} />
+          <Route exact path='/renderquiz' element={<Renderquiz />} />
+          <Route exact path='/signup' element={<SignUp />} />
+          <Route exact path='/login' element={<Login />} />
+
+
+          {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
+          {/* <Route path="/build" element={<BuildQuiz />} /> */}
         </Routes>
         <Footer />
       </Router>
