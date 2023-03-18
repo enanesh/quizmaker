@@ -11,7 +11,7 @@ const typeDefs = `#graphql
   "Get Quizes you've Taken"
     getAllQuizzesByStudent: [Quiz]!
   "Get Answers by Quiz ID"
-    getAnswersByQuizId: [Answers!]!
+    getAnswersByQuizId: [Answer!]!
   "Get Profile Information"
     getMyProfile: User!
   "Search for User by username or email"
@@ -24,7 +24,7 @@ const typeDefs = `#graphql
     "Login"
     login: User
     "Create a Quiz!"
-    createQuiz: Quiz;
+    createQuiz: Quiz
   "Update a Quiz"
   updateQuiz: Quiz!
   "Create a Question"
@@ -75,6 +75,14 @@ const typeDefs = `#graphql
     questiontext: String!
     answers: [String!]!
     correctAnswers: [String!]!
+    questiontype: String
+  }
+
+  type Answer {
+    questionId: Question!
+    userId: User!
+    selectedanswer: [String!]!
+    isCorrect: Boolean!
   }
 
   type CompletedQuizes {
