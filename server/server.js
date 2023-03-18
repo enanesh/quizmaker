@@ -5,14 +5,12 @@ const { expressMiddleware } = require("@apollo/server/express4");
 const {
   ApolloServerPluginDrainHttpServer,
 } = require("@apollo/server/plugin/drainHttpServer");
-const { addMocksToSchema } = require('@graphql-tools/mock');
-const { makeExecutableSchema } = require('@graphql-tools/schema') ;
 const http = require("http");
 
 const { authMiddleware } = require("./utils/auth");
 
 // Import the two parts of a GraphQL schema
-const { typeDefs, resolvers, mocks } = require("./schemas");
+const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
 
 const PORT = process.env.PORT || 3001;
@@ -21,11 +19,9 @@ const app = express();
 const httpServer = http.createServer(app);
 
 const server = new ApolloServer({
-  schema: addMocksToSchema({
-    schema: makeExecutableSchema({ typeDefs, resolvers }),
-    mocks,
-  }),
-
+  typeDefs,
+  resolvers,
+  context: authMiddleware,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
 
