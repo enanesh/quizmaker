@@ -1,5 +1,6 @@
 const typeDefs = `#graphql
   type Query {
+    users: [User]
   "Find your Users"
     getQuizById: Quiz!
   "Get quiz array for homepage grid"
@@ -20,7 +21,7 @@ const typeDefs = `#graphql
 
   type Mutation {
     "Add a User"
-    addUser: User!
+    addUser(username: String!, firstname: String, lastname: String, email: String!, password: String!): Auth
     "Login"
     login: User
     "Create a Quiz!"
@@ -46,9 +47,9 @@ const typeDefs = `#graphql
     "The name a user shows the world"
     username: String!
     "First Name"
-    firstname: String!
+    firstname: String
     "Last Name"
-    lastname: String!
+    lastname: String
     "Email Address"
     email: String!
     "Hashed Password"
@@ -103,7 +104,10 @@ const typeDefs = `#graphql
     score: Float
   }
 
-
+  type Auth {
+    token: ID!
+    user: User
+  }
 `;
 
 module.exports = typeDefs;
