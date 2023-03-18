@@ -15,11 +15,36 @@ const questionSchema = new Schema({
     ],
     correctanswer: [
         {
+<<<<<<< HEAD
             type: String,
             required: true,
             trim: true,
         }
     ]
+=======
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        },
+    ],
+    questiontype: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true
+    },
+    questionname: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true
+    },
+    isrequired: {
+        type: Boolean,
+        required: true,
+    }
+>>>>>>> 294539b28f47f18cc3a35e4521aa2ae4c092523b
 });
 
 

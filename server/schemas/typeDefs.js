@@ -1,9 +1,42 @@
 const typeDefs = `#graphql
   type Query {
   "Find your Users"
-    user: [User!]!
+    getQuizById: Quiz!
   "Get quiz array for homepage grid"
-    homePageQuizes: [Quiz!]!
+    getQuestionsByQuizId: Quiz!
+  "Get all quizes"
+    getAllQuizzes: [Quiz]
+  "Get quizes by Creator"
+    getAllQuizzesByOwner: [Quiz]!
+  "Get Quizes you've Taken"
+    getAllQuizzesByStudent: [Quiz]!
+  "Get Answers by Quiz ID"
+    getAnswersByQuizId: [Answers!]!
+  "Get Profile Information"
+    getMyProfile: User!
+  "Search for User by username or email"
+    getUserByUserNameOrEmail: User
+  }
+
+  type Mutation {
+    "Add a User"
+    addUser: User!
+    "Login"
+    login: User
+    "Create a Quiz!"
+    createQuiz: Quiz;
+  "Update a Quiz"
+  updateQuiz: Quiz!
+  "Create a Question"
+    createQuestion: Question!
+  "Update a Question"
+    updateQuestion: Question!
+  "Save you Answer"
+    saveAnswer: Answer!
+  "Delete a Quiz"
+    deleteQuiz: Quiz!
+  "Delete a Question"
+    deleteQuestion: Question!
   }
 
   "Users that can take or make quizes"
