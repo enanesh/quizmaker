@@ -4,6 +4,13 @@ import React from 'react'
 const PasswordForm = () => {
   return (
     <section class="bg-gray-50 dark:bg-gray-900 bg-confetti ">
+      
+      <div class="flex flex-wrap justify-center">
+        <div class="w-6/12 sm:w-4/12 px-4">
+          <img src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg" alt="..." class="shadow rounded-full max-w-full h-auto align-middle border-none" />
+        </div>
+
+      </div>
       <div class="flex flex-col items-center  py-44  mx-auto md:h-screen  ">
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -13,7 +20,7 @@ const PasswordForm = () => {
 
             <div>
 
-              <p>You'll receive a link to create a new password via email.</p>
+              <p>Pleaseenter your email adress.You'll receive a link to create a new password via email.</p>
 
             </div>
 

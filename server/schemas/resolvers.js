@@ -7,8 +7,8 @@ const resolvers = {
     // find quiz by ID with all data
     // PROFILE/Quiz
     // PROFILE/Take a quiz: select quiz from the list
-    getQuizById: async (parent, { quizid }) => {
-      const quiz = await Quiz.findOne({ _id: quizid });
+    getQuizById: async (parent, { quizId }) => {
+      const quiz = await Quiz.findOne({ _id: quizId });
       if (!quiz) {
         throw new Error('Quiz not found');
       }
@@ -17,8 +17,8 @@ const resolvers = {
 
     // find questions related to quiz by quiz ID
     // Map to display questions by quiz id 
-    getQuestionsByQuizId: async (parent, { quizid }) => {
-      return Quiz.findOne({ _id: quizid }).populate('question');
+    getQuestionsByQuizId: async (parent, { quizId }) => {
+      return Quiz.findOne({ _id: quizId }).populate('question');
     },
 
     // get all quizzes
@@ -29,20 +29,20 @@ const resolvers = {
 
     // get all quizzes by Owner
     // PROFILE/Created by you
-    getAllQuizzesByOwner: async (parent, { ownerid }) => {
-      const quizzes = await Quiz.find({owner: ownerid});
+    getAllQuizzesByOwner: async (parent, { owernerId }) => {
+      const quizzes = await Quiz.find({owner: owernerId});
       if (quizzes.length === 0) {
-        throw new Error(`No quizzes are owned by user ${ownerid}`);
+        throw new Error(`No quizzes are owned by user ${owernerId}`);
       }
       return quizzes;
     },
 
     // get all quizzes
     // PROFILE/Assigned to you
-    getAllQuizzesByStudent: async (parent, { studentid }) => {
-      const quizzes = await Quiz.find({student: studentid});
+    getAllQuizzesByStudent: async (parent, { studentId }) => {
+      const quizzes = await Quiz.find({student: studentId});
       if (quizzes.length === 0) {
-        throw new Error(`No quizzes assigned to student with id ${studentid}`);
+        throw new Error(`No quizzes assigned to student with id ${studentId}`);
       }
       return quizzes;
     },
@@ -148,7 +148,7 @@ const resolvers = {
 
     // create Question and push to Quiz
     // PROFILE/Create a quiz (question)
-    createQuestion: async (parent, { quizid, questionData }, context) => {
+    createQuestion: async (parent, { quizId, questionData }, context) => {
       if (!context.user) {
         throw new Error('You must be logged in to create a question');
       }
@@ -161,7 +161,7 @@ const resolvers = {
     
       // Add the new question to the quiz's `question` array
       const updatedQuiz = await Quiz.findOneAndUpdate(
-        { _id: quizid, owner: context.user._id },
+        { _id: quizId, owner: context.user._id },
         { $push: { question: newQuestion._id } },
         { new: true }
       ).populate('question');
