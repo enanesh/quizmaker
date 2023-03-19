@@ -11,7 +11,7 @@ export const ADD_QUESTION = gql`
 
 // 3/18
 // SIGN UP page
-const ADD_USER = gql`
+export const ADD_USER = gql`
 mutation addUser($username: String!, $firstname: String!, $lastname: String!, $email: String!, $password: String!) {
   addUser(username: $username, firstname: $firstname, lastname: $lastname, email: $email, password: $password) {
     token
@@ -27,7 +27,7 @@ mutation addUser($username: String!, $firstname: String!, $lastname: String!, $e
 `;
 
 // LOGIN page
-const LOGIN = gql`
+export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
@@ -43,7 +43,7 @@ const LOGIN = gql`
 `;
 
 // PROFILE/Create a quiz
-const CREATE_QUIZ = gql`
+export const CREATE_QUIZ = gql`
   mutation createQuiz($quizData: QuizInput!) {
     createQuiz(quizData: $quizData) {
       _id
@@ -67,7 +67,7 @@ const CREATE_QUIZ = gql`
 `;
 
 // update quiz
-const UPDATE_QUIZ = gql`
+export const UPDATE_QUIZ = gql`
   mutation updateQuiz($quizId: ID!, $title: String!) {
     updateQuiz(quizId: $quizId, title: $title) {
       _id
@@ -77,7 +77,7 @@ const UPDATE_QUIZ = gql`
 `;
 
 //PROFILE/Create a quiz (question)
-const CREATE_QUESTION = gql`
+export const CREATE_QUESTION = gql`
   mutation createQuestion($quizid: ID!, $questionData: QuestionInput!) {
     createQuestion(quizid: $quizid, questionData: $questionData) {
       _id
@@ -91,7 +91,7 @@ const CREATE_QUESTION = gql`
 `;
 
 // Update question
-const UPDATE_QUESTION = gql`
+export const UPDATE_QUESTION = gql`
   mutation updateQuestion($questionId: ID!, $updatedQuestionData: QuestionInput!) {
     updateQuestion(questionId: $questionId, updatedQuestionData: $updatedQuestionData) {
       _id
@@ -103,7 +103,7 @@ const UPDATE_QUESTION = gql`
 `;
 
 // Save answer
-const SAVE_ANSWER = gql`
+export const SAVE_ANSWER = gql`
   mutation saveAnswer($questionId: ID!, $selectedAnswer: String!, $isCorrect: Boolean!) {
     saveAnswer(answerData: {questionId: $questionId, selectedAnswer: $selectedAnswer, isCorrect: $isCorrect}) {
       _id
@@ -116,14 +116,14 @@ const SAVE_ANSWER = gql`
 `;
 
 // DELETE Quiz
-const DELETE_QUIZ = gql`
+export const DELETE_QUIZ = gql`
   mutation ($quizId: ID!) {
     deleteQuiz(quizId: $quizId)
   }
 `;
 
 // DELETE Question
-const DELETE_QUESTION = gql`
+export const DELETE_QUESTION = gql`
   mutation deleteQuestion($questionId: ID!) {
     deleteQuestion(questionId: $questionId) {
       _id

@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../utils/mutations";
+import auth from "../utils/auth";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    //MR 3/19/23
+    const [ login, { error } ] = useMutation(LOGIN);
 
     const handleInputChange = (e) => {
         const { target } = e;
@@ -16,20 +22,30 @@ const Login = () => {
         }
     };
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
         let user = { email, password }
         console.log(`User:\n${JSON.stringify(user)}`)
-        fetch('/graphql', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-            .then((res) => {
-                console.log(res);
-            })
+        //MR 3/19/23
+        // fetch('/graphql', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(user)
+        // })
+        //     .then((res) => {
+        //         console.log(res);
+        //     })
+
+        // MR 3/19/23
+        const {data} = await login({
+            variables: {email, password}
+        });
+
+        //MR 3/19/23
+        console.log(data);
+        auth.login(data.login.token)
 
         setEmail('');
         setPassword('');
@@ -78,8 +94,9 @@ const Login = () => {
                   border-gray-300 rounded-md"/>
                                 </div>
                                 <div class="relative">
+{/*  MR 3/19/23 onClick={ handleFormSubmit }  */}
                                     <button class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500
-                  rounded-lg transition duration-200 hover:bg-purple-600 ease">Login</button>
+                  rounded-lg transition duration-200 hover:bg-purple-600 ease" onClick={ handleFormSubmit }>Login</button>
                                 </div>
                                 <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                                     Did you forget your password? <a href="/password" class="font-medium text-indigo-600 hover:underline dark:text-primary-500">Reset Password</a>

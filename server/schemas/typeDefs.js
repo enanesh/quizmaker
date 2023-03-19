@@ -1,41 +1,27 @@
 const { GraphQLScalarType, Kind } = require('graphql');
 
 const typeDefs = `#graphql
-  scalar Date
-
-  "Users that can take or make quizes"
   type User {
-    "Unique Identifier"
     _id: ID
-    "The name a user shows the world"
     username: String!
-    "First Name"
     firstname: String
-    "Last Name"
     lastname: String
-    "Email Address"
     email: String!
-    "Hashed Password"
     password: String!
   }
 
-  "Oh look! A Quiz!!"
   type Quiz {
-    "Quiz Identifier"
     quizID: ID!
-    "When was this made?"
     createdAt: String!
-    "Quiz Creator"
     owner: String!
-    "Questions"
     questions: Question!
   }
 
   type QuizUser {
     user: ID!
     quiz: ID!
-    score: Float
-    completedAt: Date
+    score: Int
+    completedAt: String
   }
 
   type Question {
@@ -65,45 +51,33 @@ const typeDefs = `#graphql
 
   type Query {
     users: [User]
-  "Quiz by ID"
     getQuizById(quizId: ID!): Quiz!
-  "Get quiz array for homepage grid"
     getQuestionsByQuizId(quizId: ID!): Quiz!
-  "Get all quizes"
     getAllQuizzes: [Quiz]
-  "Get quizes by Creator"
     getAllQuizzesByOwner(owernerId: ID!): [Quiz]!
-  "Get Quizes you've Taken"
     getAllQuizzesByStudent(studentId: ID!): [Quiz]!
-  "Get Answers by Quiz ID"
     getAnswersByQuizId(quizId: ID!): [Answer!]!
-  "Get Profile Information"
     getMyProfile: User!
-  "Search for User by username or email"
     getUserByUserNameOrEmail(username: String!, email: String!): User!
   }
 
   type Mutation {
-    "Add a User"
     addUser(username: String!, firstname: String!, lastname: String!, email: String!, password: String!): Auth
-    "Login"
     login(email: String!, password: String!): Auth
-    "Create a Quiz!"
-    createQuiz(title: String!, description: String!, owner: ID!): Quiz!
-   "Update a Quiz"
-    updateQuiz(quizId: ID! title: String!): Quiz!
-   "Create a Question"
-    createQuestion(quizId: ID!, questiontext: String!, answers: [String!]! correctAnswers: [String!]! questiontype: String): Question!
-   "Update a Question"
-    updateQuestion(questionId: ID!, questiontext: String!, answers: [String!]! correctAnswers: [String!]! questiontype: String): Question!
-   "Save you Answer"
-    saveAnswer(questionId: ID!, selectedAnswer: String!, isCorrect: Boolean): Answer!
-    "Delete a Quiz"
-    deleteQuiz(quizId: ID!): Quiz!
-    "Delete a Question"
-    deleteQuestion(questionId: ID!): Quiz!
+
+    // look to this: quizData: Object!
+    createQuiz(quizData: Object!): Quiz
+    updateQuiz(quizId: ID!, title: String!): Quiz
+    createQuestion(quizId: ID!, questionData: Object!): Question
+    updateQuestion(questionId: ID!, updatedQuestionData: Object!): Question
+    saveAnswer(answerData: Object!): Answer
+    deleteQuiz(quizId: ID!): Quiz
+    deleteQuestion(questionId: ID!): Question
+
   }
 `;
+createQuiz(quizData: {title: String, options: String[]}): Quiz
+
 
 const dateScalar = new GraphQLScalarType({
   name: 'Date',
