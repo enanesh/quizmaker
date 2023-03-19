@@ -13,7 +13,7 @@ const PasswordForm = () => {
 
             <div>
 
-              <p>You'll receive a link to create a new password via email.</p>
+              <p>Pleaseenter your email adress.You'll receive a link to create a new password via email.</p>
 
             </div>
 
