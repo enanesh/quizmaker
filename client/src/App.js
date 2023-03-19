@@ -9,7 +9,7 @@ import Section from "./components/pages/Section";
 import Profile from "./components/pages/Profile";
 import RenderQuiz from "./pages/RenderQuiz";
 import BuildQuiz from "./pages/BuildQuiz";
-// import Renderquiz from "./components/pages/Renderquiz";
+import Renderquiz from "./components/pages/Renderquiz";
 import { setContext } from "@apollo/client/link/context";
 import Quizes from "./components/pages/Quizes";
 import Footer from "./components/Footer";
@@ -46,7 +46,7 @@ function App() {
           <Route exact path='/' element={<Section />} />
           <Route exact path='/quizes' element={<Quizes />} />
           <Route exact path='/profile' element={<Profile />} />
-          {/* <Route exact path='/renderquiz' element={<Renderquiz />} /> */}
+          <Route exact path='/renderquiz' element={<Renderquiz />} />
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/login' element={<Login />} />
 

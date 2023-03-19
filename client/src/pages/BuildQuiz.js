@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Modal from "react-modal";
+import ModalQuestions from "../components/pages/ModalQuestions";
 import TemporaryQuizCard from "../components/TemporaryQuizCard";
 
 const BuildQuiz = () => {
@@ -68,23 +68,20 @@ const BuildQuiz = () => {
           type="text"
           placeholder="Quiz category"
         />
+
       </div>
       <div class="mb-6 mt-6">
-        <label
-          class="block text-gray-700 text-sm font-semibold mb-2"
-          htmlFor="assigdTo"
-        >
-          Assign to:
-        </label>
-        <input
-          class="text-sm bg-gray-200 appearance-none rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10"
-          id="assignTo"
-          type="Text"
-          placeholder="Assign to"
-        />
+      <label for="users" class="block text-gray-700 text-sm font-semibold mb-2">Assign to</label>
+        <select id="users" class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline h-10">
+          <option selected>Choose a user</option>
+          <option value="1">User 1</option>
+          <option value="2">User 2</option>
+          <option value="3">User 3</option>
+          <option value="4">User 4</option>
+        </select>
       </div>
       <div class="flex w-full mt-8">
-
+        <ModalQuestions />
         <button
           class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
           onClick={() => addCard()}
