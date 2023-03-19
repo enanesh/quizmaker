@@ -1,45 +1,4 @@
 const typeDefs = `#graphql
-  type Query {
-    users: [User]
-  "Find your Users"
-    getQuizById: Quiz!
-  "Get quiz array for homepage grid"
-    getQuestionsByQuizId: Quiz!
-  "Get all quizes"
-    getAllQuizzes: [Quiz]
-  "Get quizes by Creator"
-    getAllQuizzesByOwner: [Quiz]!
-  "Get Quizes you've Taken"
-    getAllQuizzesByStudent: [Quiz]!
-  "Get Answers by Quiz ID"
-    getAnswersByQuizId: [Answer!]!
-  "Get Profile Information"
-    getMyProfile: User!
-  "Search for User by username or email"
-    getUserByUserNameOrEmail: User
-  }
-
-  type Mutation {
-    "Add a User"
-    addUser(username: String!, firstname: String, lastname: String, email: String!, password: String!): Auth
-    "Login"
-    login: User
-    "Create a Quiz!"
-    createQuiz: Quiz
-  "Update a Quiz"
-  updateQuiz: Quiz!
-  "Create a Question"
-    createQuestion: Question!
-  "Update a Question"
-    updateQuestion: Question!
-  "Save you Answer"
-    saveAnswer: Answer!
-  "Delete a Quiz"
-    deleteQuiz: Quiz!
-  "Delete a Question"
-    deleteQuestion: Question!
-  }
-
   "Users that can take or make quizes"
   type User {
     "Unique Identifier"
@@ -72,6 +31,13 @@ const typeDefs = `#graphql
     results: [Results]
   }
 
+  type QuizUser {
+    user: ID!
+    quiz: ID!
+    score: Number
+    completedAt: Date
+  }
+
   type Question {
     questiontext: String!
     answers: [String!]!
@@ -86,27 +52,56 @@ const typeDefs = `#graphql
     isCorrect: Boolean!
   }
 
-  type CompletedQuizes {
-    quiz: [Quiz]
-
-  }
-
-  "Lets see how you did."
-  type Results {
-    _id: ID!
-    "Who took the quiz"
-    quizTaker: User!
-    "When did they turn in the quiz?"
-    submittedTime: String!
-    "The answers they submitted"
-    submittedAnswers: [String!]!
-    "Percent correct"
-    score: Float
+  type Category {
+    name: String!
+    description: String!
+    quizes: [Quiz]!
   }
 
   type Auth {
     token: ID!
     user: User
+  }
+
+  type Query {
+    users: [User]
+  "Quiz by ID"
+    getQuizById(quizId: ID!): Quiz!
+  "Get quiz array for homepage grid"
+    getQuestionsByQuizId(quizId: ID!): Quiz!
+  "Get all quizes"
+    getAllQuizzes: [Quiz]
+  "Get quizes by Creator"
+    getAllQuizzesByOwner(owernerId: ID!): [Quiz]!
+  "Get Quizes you've Taken"
+    getAllQuizzesByStudent(studentId: ID!): [Quiz]!
+  "Get Answers by Quiz ID"
+    getAnswersByQuizId(quizId: ID!): [Answer!]!
+  "Get Profile Information"
+    getMyProfile(context): User!
+  "Search for User by username or email"
+    getUserByUserNameOrEmail(username: String!, email: String!): User!
+  }
+
+  type Mutation {
+    "Add a User"
+    addUser(username: String!, firstname: String!, lastname: String!, email: String!, password: String!): Auth
+    "Login"
+    login(email: String!, password: String!): Auth
+    "Create a Quiz!"
+    createQuiz(quizData: Object!, context)
+   "Update a Quiz"
+    updateQuiz(quizId: ID! title: String!, context)
+   "Create a Question"
+    createQuestion(quizId: ID!, questionData: Object!, context)
+   "Update a Question"
+    updateQuestion(questionId: ID!, updatedQuestionData: Object!, context)
+   "Save you Answer"
+    saveAnswer(answerData: Object!, context)
+    "Delete a Quiz"
+    deleteQuiz(quizId: ID!, context)
+    "Delete a Question"
+    deleteQuestion(questionId: ID!, context)
   }
 `;
 
