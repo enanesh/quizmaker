@@ -35,7 +35,7 @@ const Login = () => {
         setPassword('');
     };
     return (
-        <div class="bg-confetti relative lg:py-20">
+        <div  class="bg-confetti relative lg:py-20">
             <div class="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-0 mr-auto mb-0 ml-auto max-w-7xl
       xl:px-5 lg:flex-row">
                 <div class="flex flex-col items-center w-full pt-5 pr-10 pb-20 pl-10 lg:pt-20 lg:flex-row">
@@ -82,7 +82,7 @@ const Login = () => {
                   rounded-lg transition duration-200 hover:bg-purple-600 ease">Login</button>
                                 </div>
                                 <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                                    Did you forget your password? <a href="#" class="font-medium text-indigo-600 hover:underline dark:text-primary-500">Reset Password</a>
+                                    Did you forget your password? <a href="/password" class="font-medium text-indigo-600 hover:underline dark:text-primary-500">Reset Password</a>
                                 </p>
                             </div>
                         </div>

@@ -14,6 +14,7 @@ import { setContext } from "@apollo/client/link/context";
 import Quizes from "./components/pages/Quizes";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
+import PasswordForm from "./components/PasswordForm";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -49,9 +50,10 @@ function App() {
           {/* <Route exact path='/renderquiz' element={<Renderquiz />} /> */}
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/login' element={<Login />} />
+          <Route exact path='/password' element={<PasswordForm />} />
 
 
-          <Route path="/quiz" element={<RenderQuiz />} />
+          {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
           <Route path="/build" element={<BuildQuiz />} />
         </Routes>
         <Footer />
