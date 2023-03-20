@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import TemporaryQuizCard from "../TemporaryQuizCard";
 
 export default function Modal(props) {
-  const [questionNumber, setQuestionNumber] = useState();
+  const [questions, setQuestions] = useState([{}]);
   const [showModal, setShowModal] = React.useState(false);
   const visibility = props.initInfo[0];
   const quizTitle = props.initInfo[2];
   const quizCategory = props.initInfo[3];
   const quizAssignedTo = props.initInfo[4];
   const numOfQuestions = props.initInfo[5];
+
+
 
   let questionsList = [];
   let count = 0;
@@ -20,7 +22,7 @@ export default function Modal(props) {
       <form id={`formQuestion${count}`}>
       <div class="md:col-span-5 mx-2">
           <label for="question">Question # {count}</label>
-          <input type="text" name="question" id="question" class="h-7 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+          <input type="text" name="question" id={`question${count}`} class="h-7 border mt-1 rounded px-4 w-full bg-gray-50" />
       </div>
 
       <div class="md:col-span-5 mx-2 mb-3">
@@ -33,40 +35,32 @@ export default function Modal(props) {
       <ul class="items-center w-full text-sm font-medium bg-white border border-gray-200 rounded-lg sm:flex">
         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
             <div class="flex items-center pl-3">
-                <input id={`radio-option-1-${count}`} type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                <input type="text" name="option1" id="option1" class="m-1 h-7 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                <input id={`1`} type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                <input type="text" name="option1" id={`option1-${count}`} class="m-1 h-7 border mt-1 rounded px-4 w-full bg-gray-50"  />
             </div>
         </li>
         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
             <div class="flex items-center pl-3">
-                <input id={`radio-option-2-${count}`} type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                <input type="text" name="option2" id="option2" class="m-1 h-7 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                <input id={`2`} type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                <input type="text" name="option2" id={`option2-${count}`} class="m-1 h-7 border mt-1 rounded px-4 w-full bg-gray-50"  />
             </div>
         </li>
         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
             <div class="flex items-center pl-3">
-                <input id={`radio-option-3-${count}`} type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                <input type="text" name="option3" id="option3" class="m-1 h-7 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                <input id={`3`} type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                <input type="text" name="option3" id={`option3-${count}`} class="m-1 h-7 border mt-1 rounded px-4 w-full bg-gray-50"  />
             </div>
         </li>
         <li class="w-full dark:border-gray-600">
             <div class="flex items-center pl-3">
-                <input id={`radio-option-4-${count}`} type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                <input type="text" name="option4" id="option4" class="m-1 h-7 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                <input id={`4`} type="radio" value="" name="list-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                <input type="text" name="option4" id={`option4-${count}`} class="m-1 h-7 border mt-1 rounded px-4 w-full bg-gray-50"  />
             </div>
 
         </li>
       </ul>
       </div>
-      <button
-        className="ml-3 my-1 bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-8"
-        type="button"
-        onClick={() => {
-          
-        }}
-        >
-        Add question
-        </button>
+    
       </form>
       </>
       
@@ -118,7 +112,48 @@ export default function Modal(props) {
                   >
                     Close
                   </button>
+                  <button
+                    className="ml-3 my-1 bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-8" id={`saveQuestion${count}`}
+                    type="button"
+                    onClick={
+                    () =>{
 
+                      const questionsForms = document.querySelectorAll("form");
+                      let quiz = {
+                        "title" : quizTitle,
+                        "category": quizCategory,
+                        "assignedTo": quizAssignedTo,
+                        questions: [],
+                        options: [],
+                        correctAnswers: []
+                        
+                      };
+          
+                      
+                      let count = 0;
+                      for (let index = 0; index < questionsForms.length; index++) {
+                        ++count;
+                        //console.log(document.getElementById(`question${count}`).value);
+                        quiz.questions.push({
+                          "question_name":document.getElementById(`question${count}`).value
+                        });
+                        for (let index1 = 1; index1 < 5; index1++) {
+                          quiz.options.push({
+                            "option": document.getElementById(`option${index1}-${count}`).value
+                          });
+                          
+                          if(document.getElementById(index1).checked){
+                           quiz.correctAnswers.push(document.getElementById(index1).id);
+                          }
+                          
+                        }  
+                      }
+                      console.log(quiz);
+                    }
+                    }
+                    >
+                    Save quiz
+                  </button>
                 </div>
               </div>
             </div>
