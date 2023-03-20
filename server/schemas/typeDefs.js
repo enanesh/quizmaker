@@ -10,6 +10,11 @@ const typeDefs = `#graphql
     password: String!
   }
 
+  type PasswordReset {
+    user: ID!
+    resetLink: String!
+  }
+
   type Quiz {
     quizID: ID!
     createdAt: String!
@@ -64,6 +69,7 @@ const typeDefs = `#graphql
   type Mutation {
     addUser(username: String!, firstname: String!, lastname: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    requestPwReset(email: String): 
 
     // look to this: quizData: Object!
     createQuiz(quizData: Object!): Quiz

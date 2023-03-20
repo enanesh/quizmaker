@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { Answer, Category, Question, Quiz, QuizUser, User } = require("../models");
+const { Answer, Category, Question, Quiz, QuizUser, User, PasswordReset } = require("../models");
 const { signToken } = require("../utils/auth");
+const { linkGenerator, theFerryman } = require("../utils")
 
 const resolvers = {
   Query: {
@@ -30,7 +31,7 @@ const resolvers = {
     // get all quizzes by Owner
     // PROFILE/Created by you
     getAllQuizzesByOwner: async (parent, { owernerId }) => {
-      const quizzes = await Quiz.find({owner: owernerId});
+      const quizzes = await Quiz.find({ owner: owernerId });
       if (quizzes.length === 0) {
         throw new Error(`No quizzes are owned by user ${owernerId}`);
       }
@@ -40,7 +41,7 @@ const resolvers = {
     // get all quizzes
     // PROFILE/Assigned to you
     getAllQuizzesByStudent: async (parent, { studentId }) => {
-      const quizzes = await Quiz.find({student: studentId});
+      const quizzes = await Quiz.find({ student: studentId });
       if (quizzes.length === 0) {
         throw new Error(`No quizzes assigned to student with id ${studentId}`);
       }
@@ -65,7 +66,7 @@ const resolvers = {
 
     // FORGET PASSWORD page
     getUserByUserNameOrEmail: async (parent, { username, email }) => {
-      const user = await User.findOne({$or: [{ username: username }, { email: email }] });
+      const user = await User.findOne({ $or: [{ username: username }, { email: email }] });
       if (!user) {
         throw new Error('User not found');
       }
@@ -78,7 +79,7 @@ const resolvers = {
   Mutation: {
     // SIGN UP page
     addUser: async (parent, { username, firstname, lastname, email, password }) => {
-      const user = await User.create({ username,firstname, lastname, email, password });
+      const user = await User.create({ username, firstname, lastname, email, password });
       const token = signToken(user);
       return { token, user };
     },
@@ -95,13 +96,40 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    // Reset Password Request
+    requestPwReset: async (parent, args, contextValue, info) => {
+      const resetLink = linkGenerator();
+      const { email } = args;
+
+      let user = await User.findOne({ email });
+      if (user === null) {
+        throw new Error("Can't find user with that email!")
+      }
+      user = {
+        name: `${user.firstname} ${user.lastname}`,
+        email: email
+      }
+
+      const resetPwRequest = await PasswordReset.create({
+        user: user._id,
+        resetLink
+      })
+      if (!resetPwRequest) {
+        throw new Error("Request unsuccessful")
+      }
+
+      await theFerryman(user, "password", resetLink);
+
+      return { message: "If user exists, request was emailed to them" }
+
+    },
     // PROFILE/Create a quiz (1)
     createQuiz: async (parent, { quizData }, context) => {
       // Check if user is logged in
       if (!context.user) {
         throw new Error('You need to be logged in to create a quiz!');
       }
-    
+
       // Create new quiz document
       const newQuiz = new Quiz({
         title: quizData.title,
@@ -109,17 +137,17 @@ const resolvers = {
         owner: context.user._id,
         questions: quizData.questions,
       });
-    
+
       // Find category by ID and push new quiz to quizzes array
       const updatedCategory = await Category.findOneAndUpdate(
         { _id: quizData.category },
         { $push: { quizzes: newQuiz } },
         { new: true }
       );
-    
+
       // Save new quiz document
       await newQuiz.save();
-    
+
       return newQuiz;
     },
 
@@ -152,24 +180,24 @@ const resolvers = {
       if (!context.user) {
         throw new Error('You must be logged in to create a question');
       }
-    
+
       // Create the new question
       const newQuestion = await Question.create({
         ...questionData,
         owner: context.user._id
       });
-    
+
       // Add the new question to the quiz's `question` array
       const updatedQuiz = await Quiz.findOneAndUpdate(
         { _id: quizId, owner: context.user._id },
         { $push: { question: newQuestion._id } },
         { new: true }
       ).populate('question');
-    
+
       if (!updatedQuiz) {
         throw new Error('Quiz not found or you do not have permission to update it');
       }
-    
+
       return updatedQuiz;
     },
 
@@ -179,20 +207,20 @@ const resolvers = {
       if (!context.user) {
         throw new Error('You must be logged in to update a question.');
       }
-    
+
       const question = await Question.findById(questionId);
-    
+
       if (!question) {
         throw new Error('Question not found.');
       }
-    
+
       // Update the question data with the new values.
       // Object.assign is for update the properties of an existing object without having to create a new object from scratch
       Object.assign(question, updatedQuestionData);
-    
+
       // Save the updated question.
       const updatedQuestion = await question.save();
-    
+
       return updatedQuestion;
     },
 
@@ -202,9 +230,9 @@ const resolvers = {
       if (!context.user) {
         throw new Error('You need to be logged in!');
       }
-    
+
       const { questionId, selectedAnswer, isCorrect } = answerData;
-    
+
       // Create new answer document
       const newAnswer = new Answer({
         questionId,
@@ -212,10 +240,10 @@ const resolvers = {
         selectedanswer: selectedAnswer,
         isCorrect,
       });
-    
+
       // Save answer to database
       const savedAnswer = await newAnswer.save();
-    
+
       // Return saved answer document
       return savedAnswer;
     },
