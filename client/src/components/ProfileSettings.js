@@ -48,7 +48,8 @@ const ProfileSettings = () => {
                                     <div class="md:col-span-2">
                                         <label for="email">Change Password</label>
                                         <button class="h-10 border mt-1 w-full bg-blue-600 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded">
-                                            Reset Password
+                                            <a href="/newpassword" > Reset Password </a>
+                                            
                                         </button>
                                     </div>
 
