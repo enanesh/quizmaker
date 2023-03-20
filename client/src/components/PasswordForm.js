@@ -4,23 +4,17 @@ import React from 'react'
 const PasswordForm = () => {
   return (
     <section class="bg-gray-50 dark:bg-gray-900 bg-confetti ">
-      
-      <div class="flex flex-wrap justify-center">
-        <div class="w-6/12 sm:w-4/12 px-4">
-          <img src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-2-800x800.jpg" alt="..." class="shadow rounded-full max-w-full h-auto align-middle border-none" />
-        </div>
 
-      </div>
       <div class="flex flex-col items-center  py-44  mx-auto md:h-screen  ">
-        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full bg-white rounded-lg shadow-2xl dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center ">
-              Reset password
+              Reset  Password
             </h1>
 
             <div>
 
-              <p>Pleaseenter your email adress.You'll receive a link to create a new password via email.</p>
+              <p>Please enter your email adress.You'll receive a link to create a new password via email.</p>
 
             </div>
 
@@ -46,7 +40,7 @@ const PasswordForm = () => {
 
               <button
                 type="submit"
-                class="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                class="w-full text-white bg-blue-600 hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Get a New Password
               </button>

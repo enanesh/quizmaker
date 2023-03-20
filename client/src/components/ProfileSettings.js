@@ -47,17 +47,35 @@ const ProfileSettings = () => {
 
                                     <div class="md:col-span-2">
                                         <label for="email">Change Password</label>
-                                        <button class="h-10 border mt-1 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        <button class="h-10 border mt-1 w-full bg-blue-600 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded">
                                             Reset Password
                                         </button>
                                     </div>
+
+
+                                    <div class="md:col-span-2">
+
+                                    </div>
+
+                                    <div class="md:col-span-2">
+                                        <label for="full_name">New Password</label>
+                                        <input type="text" name="full_name" id="full_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="****" />
+
+                                    </div>
+
+                                    <div class="md:col-span-3">
+                                        <label for="full_name">Confirm Password</label>
+                                        <input type="text" name="full_name" id="full_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="****" />
+
+                                    </div>
+
 
 
 
 
                                     <div class="md:col-span-5 text-right">
                                         <div class="inline-flex items-end">
-                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                                            <button class="bg-blue-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded">Submit</button>
                                         </div>
                                     </div>
 

@@ -16,6 +16,8 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import PasswordForm from "./components/PasswordForm";
 import ProfileSettings from "./components/ProfileSettings";
+import ResetPassword from "./components/NewPassword";
+import NewPassword from "./components/NewPassword";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -53,7 +55,7 @@ function App() {
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/password' element={<PasswordForm />} />
           <Route exact path='/settings' element={<ProfileSettings />} />
-
+          <Route exact path='/newpassword' element={<NewPassword />} />
           {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
           <Route path="/build" element={<BuildQuiz />} />
         </Routes>

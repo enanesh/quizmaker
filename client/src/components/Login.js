@@ -8,7 +8,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     //MR 3/19/23
-    const [ login, { error } ] = useMutation(LOGIN);
+    const [login, { error }] = useMutation(LOGIN);
 
     const handleInputChange = (e) => {
         const { target } = e;
@@ -39,8 +39,8 @@ const Login = () => {
         //     })
 
         // MR 3/19/23
-        const {data} = await login({
-            variables: {email, password}
+        const { data } = await login({
+            variables: { email, password }
         });
 
         //MR 3/19/23
@@ -52,8 +52,7 @@ const Login = () => {
     };
     return (
         <div class="bg-confetti relative lg:py-20">
-            <div class="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-0 mr-auto mb-0 ml-auto max-w-7xl
-      xl:px-5 lg:flex-row">
+            <div class="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-0 mr-auto mb-0 ml-auto max-w-7xl xl:px-5 lg:flex-row">
                 <div class="flex flex-col items-center w-full pt-5 pr-10 pb-20 pl-10 lg:pt-20 lg:flex-row">
                     <div class="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-7/12">
                         <div class="flex flex-col items-center justify-center w-full h-full relative lg:pr-10">
@@ -94,9 +93,9 @@ const Login = () => {
                   border-gray-300 rounded-md"/>
                                 </div>
                                 <div class="relative">
-{/*  MR 3/19/23 onClick={ handleFormSubmit }  */}
+                                    {/*  MR 3/19/23 onClick={ handleFormSubmit }  */}
                                     <button class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500
-                  rounded-lg transition duration-200 hover:bg-purple-600 ease" onClick={ handleFormSubmit }>Login</button>
+                  rounded-lg transition duration-200 hover:bg-purple-600 ease" onClick={handleFormSubmit}>Login</button>
                                 </div>
                                 <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                                     Did you forget your password? <a href="/password" class="font-medium text-indigo-600 hover:underline dark:text-primary-500">Reset Password</a>
