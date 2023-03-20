@@ -30,6 +30,9 @@ const theFerryman = function (user, messageType, customLink) {
   sendMail(message);
 };
 
+console.log(`\n\nEmail: ${JSON.stringify(process.env.EMAIL_ADDRESS)}`)
+console.log(`\n\nPassword: ${process.env.EMAIL_PASSWORD}`)
+
 module.exports = theFerryman;
 
 // The Ferryman variables:
