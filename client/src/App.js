@@ -55,7 +55,7 @@ function App() {
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/password' element={<PasswordForm />} />
           <Route exact path='/settings' element={<ProfileSettings />} />
-          <Route exact path='/newpassword' element={<NewPassword />} />
+          <Route exact path='/newpassword:resetLink' element={<NewPassword />} />
           {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
           <Route path="/build" element={<BuildQuiz />} />
         </Routes>

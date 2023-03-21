@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client';
 import { REQUEST_PW_RESET } from "../utils/mutations";
+import { useNavigate } from "react-router-dom";
 
 
 const PasswordForm = () => {
   const [ email, setEmail ] = useState('')
   const [ message, setMessage ] = useState('')
   const [requestPwReset, { data, loading, error }] = useMutation(REQUEST_PW_RESET);
+  const navigate = useNavigate();
   
   if (loading) return 'Requesting...';
   if (error) return `Request Error: ${error.message}`
@@ -32,6 +34,7 @@ const PasswordForm = () => {
       setMessage('Password Request Sent - Check Your Email')
       setTimeout(() => {
         setMessage(null)
+        navigate("/")
       }, 5000);
     }
   };
