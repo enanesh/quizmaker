@@ -1,7 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { gql, useMutation } from '@apollo/client';
 
 
 const PasswordForm = () => {
+  const [ email, setEmail ] = useState('')
+
+  const handleInputChange = (e) => {
+    const { target } = e;
+    const inputType = target.name;
+    const inputValue = target.value;
+
+    // Need to create Mutation before this goes live
+    // const [addTodo, { data, loading, error }] = useMutation(REQUEST_PW_RESET);
+    // if (loading) return 'Requesting...';
+    // if (error) return `Request Error: ${error.message}`
+
+    if (inputType === 'email') {
+      setEmail(inputValue);
+    }
+  };
+
+
+
   return (
     <section class="bg-gray-50 dark:bg-gray-900 bg-confetti ">
 
@@ -30,6 +50,8 @@ const PasswordForm = () => {
                   type="email"
                   name="email"
                   id="email"
+                  value={email}
+                  onChange={handleInputChange}
                   class="bg-gray-50 border border-gray-300  text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
                   required=""
