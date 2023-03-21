@@ -112,7 +112,7 @@ const SignUp = () => {
                 <div class="relative">
                   <button 
                   onClick={handleFormSubmit}
-                  class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500
+                  class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500 dark:bg-blue-700
                   rounded-lg transition duration-200 hover:bg-purple-600 ease">Sign Up</button>
                 </div>
                 <p class="text-sm font-light text-gray-500 dark:text-gray-400">

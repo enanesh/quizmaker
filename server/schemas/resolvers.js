@@ -17,7 +17,7 @@ const resolvers = {
     },
 
     // find questions related to quiz by quiz ID
-    // Map to display questions by quiz id 
+    // Map to display questions by quiz id
     getQuestionsByQuizId: async (parent, { quizId }) => {
       return Quiz.findOne({ _id: quizId }).populate('question');
     },
@@ -74,6 +74,12 @@ const resolvers = {
     },
     users: async () => {
       return User.find();
+    },
+    questions: async () => {
+      return Question.find();
+    },
+    answers: async () => {
+      return Answer.find();
     },
   },
   Mutation: {
@@ -276,7 +282,61 @@ const resolvers = {
         }
         return deletedQuestion;
       }
-      throw new Error('You need to be logged in!');
+      throw new Error("You need to be logged in!");
+    },
+    addQuiz: async (parent, { quizId, title }, context) => {
+      console.log(">>>>>>>>>>>>");
+      console.log("quizId: ", quizId);
+      console.log("title: ", title);
+
+      return Quiz.create({
+        quizId: quizId,
+        title: title,
+      });
+    },
+    addQuestion: async (parent, { quizId, questionId, questiontext, questiontype, correctanswer }, context) => {
+      console.log("!!!!!!!!!!!");
+      console.log("quizId: ", quizId);
+      console.log("questionId: ", questionId);
+      console.log("questiontext: ", questiontext);
+      console.log("questiontype: ", questiontype);
+      console.log("correctanswer: ", correctanswer);
+
+      const question = await Question.create({
+        questionId: questionId,
+        questiontext: questiontext,
+        questiontype: questiontype,
+        correctanswer: correctanswer,
+      });
+      await Quiz.findOneAndUpdate(
+        { quizId: quizId },
+        {
+          $addToSet: {
+            questions: question._id,
+          },
+        }
+      );
+      return question;
+    },
+
+    addAnswer: async (parent, { questionId, selectedanswer }, context) => {
+      console.log(">>>>>>>>>>>>");
+      console.log("questionId: ", questionId);
+      console.log("selectedanswer: ", selectedanswer);
+
+      const answer = await Answer.create({
+        questionId: questionId,
+        selectedanswer: selectedanswer,
+      });
+      await Question.findOneAndUpdate(
+        { questionId: questionId },
+        {
+          $addToSet: {
+            answers: answer._id,
+          },
+        }
+      );
+      return answer;
     },
   },
 };

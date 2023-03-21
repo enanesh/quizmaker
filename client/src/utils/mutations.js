@@ -1,10 +1,31 @@
 import { gql } from "@apollo/client";
 
-// TODO: THIS IS JUST A PLACEHOLDER... without this I was getting a lot of errors when creating the cards
-export const ADD_QUESTION = gql`
-  mutation addQuestion($title: String!) {
-    addQuestion(title: $title) {
+export const ADD_QUIZ = gql`
+  mutation addQuiz($quizId: String, $title: String) {
+    addQuiz(quizId: $quizId, title: $title) {
+      quizId
       title
+    }
+  }
+`;
+export const ADD_QUESTION = gql`
+  mutation addQuestion($quizId: String, $questionId: String, $questiontext: String, $questiontype: String, $correctanswer: String) {
+    addQuestion(quizId: $quizId, questionId: $questionId, questiontext: $questiontext, questiontype: $questiontype, correctanswer: $correctanswer) {
+      _id
+      questionId
+      questiontext
+      questiontype
+      correctanswer
+    }
+  }
+`;
+
+export const ADD_ANSWER = gql`
+  mutation addAnswer($questionId: String, $selectedanswer: String) {
+    addAnswer(questionId: $questionId, selectedanswer: $selectedanswer) {
+      _id
+      questionId
+      selectedanswer
     }
   }
 `;
@@ -12,18 +33,18 @@ export const ADD_QUESTION = gql`
 // 3/18
 // SIGN UP page
 export const ADD_USER = gql`
-mutation addUser($username: String!, $firstname: String, $lastname: String, $email: String!, $password: String!) {
-  addUser(username: $username, firstname: $firstname, lastname: $lastname, email: $email, password: $password) {
-    token
-    user {
-      _id
-      username
-      firstname
-      lastname
-      email
+  mutation addUser($username: String!, $firstname: String, $lastname: String, $email: String!, $password: String!) {
+    addUser(username: $username, firstname: $firstname, lastname: $lastname, email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+        firstname
+        lastname
+        email
+      }
     }
   }
-}
 `;
 
 // LOGIN page
@@ -44,11 +65,11 @@ export const LOGIN = gql`
 
 export const REQUEST_PW_RESET = gql`
   mutation Mutation($email: String) {
-  requestPwReset(email: $email) {
-    user
+    requestPwReset(email: $email) {
+      user
+    }
   }
-}
-`
+`;
 
 // PROFILE/Create a quiz
 export const CREATE_QUIZ = gql`
