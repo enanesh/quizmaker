@@ -23,7 +23,7 @@ const theFerryman = function (user, messageType, customLink) {
   switch (messageType) {
     case "password":
       message.subject = "Password Reset Request";
-      message.html = `<pre>Hi ${user.name},\n\nForgot your password?\nWe received a request to reset the password for your account.\n\nTo reset your password, click on the link below:\n</pre>http://localhost:3001/newpassword/${customLink}`;
+      message.html = `<pre>Hi ${user.name},\n\nForgot your password?\nWe received a request to reset the password for your account.\n\nTo reset your password, click on the link below:\n</pre>http://localhost:3000/newpassword/${customLink}`;
       break;
   }
   sendMail(message);

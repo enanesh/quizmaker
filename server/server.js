@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 require("dotenv").config();
 // Import the ApolloServer class
 const { ApolloServer } = require("@apollo/server");
@@ -30,7 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
+  app.use(express.static(path.join(__dirname, "/client/build")));
 }
 
 app.get("/", (req, res) => {
