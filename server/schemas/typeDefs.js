@@ -70,19 +70,15 @@ const typeDefs = `#graphql
     addUser(username: String!, firstname: String!, lastname: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     requestPwReset(email: String): 
-
-    // look to this: quizData: Object!
-    createQuiz(quizData: Object!): Quiz
-    updateQuiz(quizId: ID!, title: String!): Quiz
-    createQuestion(quizId: ID!, questionData: Object!): Question
-    updateQuestion(questionId: ID!, updatedQuestionData: Object!): Question
-    saveAnswer(answerData: Object!): Answer
+    createQuiz(title: String!, createdAt: String!, owner: [ID]!, question: [ID], student: [ID]): Quiz
+    updateQuiz(_id: ID!, title: String, createdAt: String, owner: [ID], question: [ID], student: [ID]): Quiz
+    createQuestion(questiontext: String!, answer: [String]!, correctanswer: [String]!, questiontype: String!): Question
+    updateQuestion(_id: ID!, questiontext: String, answer: [String], correctanswer: [String], questiontype: String): Question
+    saveAnswer(questionId: ID!, userId: ID!, selectedanswer: [String]!, isCorrect: Boolean!): Answer
     deleteQuiz(quizId: ID!): Quiz
     deleteQuestion(questionId: ID!): Question
-
   }
 `;
-createQuiz(quizData: {title: String, options: String[]}): Quiz
 
 
 const dateScalar = new GraphQLScalarType({
