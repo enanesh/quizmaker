@@ -20,7 +20,7 @@ const options = [
     {
       id: 3,
       name: 'Created by you',
-      href: '/quizes/userId',
+      href: '/myquizzes/:userId',
       imageSrc: './by_you.png',
       imageAlt: 'Created by you',
     },
