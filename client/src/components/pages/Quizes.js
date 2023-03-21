@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ALL_QUIZZES } from "../../utils/queries";
+import { format } from 'date-fns'
+import Moment from 'moment';
 import { Link } from "react-router-dom";
 
 const AppQuizes = () => {
-  const { loading, data } = useQuery(GET_ALL_QUIZZES);
+  Moment.locale('en');
 
+  const { loading, data } = useQuery(GET_ALL_QUIZZES);
+  console.log("data --->", data);
   const quizzes = data?.getAllQuizzes || [];
 
   console.log("quizzess --->", quizzes);
@@ -61,17 +65,17 @@ const AppQuizes = () => {
                 Title
               </th>
               <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+                Created
+              </th>
+              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                 Category
               </th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
-                Description
-              </th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+              <th className="px-6 text-center py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                 Number of questions
               </th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+              {/* <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
                 Creator
-              </th>
+              </th> */}
               <th className="px-6 py-3 border-b-2 border-gray-300"></th>
             </tr>
           </thead>
@@ -85,7 +89,7 @@ const AppQuizes = () => {
                       <div className="flex items-center">
                         <div>
                           <div className="text-sm leading-5 text-gray-800">
-                            {quiz._id}
+                            {quiz.quizId}
                           </div>
                         </div>
                       </div>
@@ -96,22 +100,19 @@ const AppQuizes = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                      Category name
+                      {quiz.createdAt}
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
-                      Test description
+                      {quiz.description}
                     </td>
-                    <td className="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                    <td className="px-6 text-center py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
                       <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                         <span
                           aria-hidden
                           className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
                         ></span>
-                        <span className="relative text-xs">10</span>
+                        <span className="relative text-xs">{quiz.questions.length}</span>
                       </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
-                      Test owner
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
                       <button className="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">

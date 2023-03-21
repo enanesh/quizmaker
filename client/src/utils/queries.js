@@ -1,5 +1,12 @@
 import { gql } from '@apollo/client';
 
+export const GET_ALL_USERS = gql`
+    query getAllUsers {
+      users {
+        username
+      }
+    }
+`;
 // PROFILE/Take a quiz: select quiz from the list
 const GET_QUIZ_BY_ID = gql`
   query GetQuizById($quizId: ID!) {
@@ -49,24 +56,19 @@ const GET_QUESTIONS_BY_QUIZID = gql`
 
 // DASHBOARD: Map first 6 quizes to display in feeder
 export const GET_ALL_QUIZZES = gql`
-  query {
-    getAllQuizzes {
-      _id
-      title
-      owner {
-        _id
-        username
-      }
-      question {
-        _id
-        questiontext
-      }
-      student {
-        _id
-        username
-      }
+  query getAllQuizzes {
+  getAllQuizzes {
+    quizId
+    title
+    description
+    createdAt
+    owner
+    questions {
+      questionId
     }
+
   }
+}
 `;
 
 // PROFILE/Created by you

@@ -12,6 +12,10 @@ const quizSchema = new Schema({
     // unique: true,
     trim: true,
   },
+  description: {
+    type: String,
+    trim: true,
+  },
   createdAt: {
     type: Date,
     // required: true
