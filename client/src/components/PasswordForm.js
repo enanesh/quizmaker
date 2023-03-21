@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 
 const PasswordForm = () => {
-  const [ email, setEmail ] = useState('')
-  const [ message, setMessage ] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
   const [requestPwReset, { data, loading, error }] = useMutation(REQUEST_PW_RESET);
   const navigate = useNavigate();
-  
+
   if (loading) return 'Requesting...';
   if (error) return `Request Error: ${error.message}`
 
@@ -26,7 +26,6 @@ const PasswordForm = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    
     const mutationResponse = await requestPwReset({ variables: { "email": email } });
     console.log(`\n\nResponse:\n${JSON.stringify(mutationResponse)}`)
     if (mutationResponse.data.requestPwReset.user) {
@@ -78,10 +77,10 @@ const PasswordForm = () => {
 
 
               {message && (
-            <div>
-              <p>{message}</p>
-            </div>
-          )}
+                <div>
+                  <p>{message}</p>
+                </div>
+              )}
               <button
                 type="submit"
                 onClick={handleFormSubmit}

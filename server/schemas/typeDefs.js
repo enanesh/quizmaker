@@ -77,6 +77,7 @@ const typeDefs = `#graphql
     addUser(username: String!, firstname: String, lastname: String, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     requestPwReset(email: String): PasswordReset
+    resetPassword(resetLink: String!, newPassword: String!): PasswordReset
     createQuiz(title: String!, createdAt: String!, owner: ID!, question: [ID], student: [ID]): Quiz
     updateQuiz(_id: ID!, title: String, createdAt: String, owner: ID, question: [ID], student: [ID]): Quiz
     createQuestion(questiontext: String!, answer: [String]!, correctanswer: [String]!, questiontype: String!): Question
@@ -91,6 +92,7 @@ const typeDefs = `#graphql
 `;
 
 // MR 3/20/23 do we need it here? can we keep it in utils folder?
+// We will activate this code if we decide to add Date as a scalar type later.
 const dateScalar = new GraphQLScalarType({
   name: 'Date',
   description: 'Date custom scalar type',
