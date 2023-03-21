@@ -11,13 +11,14 @@ const PasswordForm = () => {
     const inputValue = target.value;
 
     // Need to create Mutation before this goes live
-    // const [addTodo, { data, loading, error }] = useMutation(REQUEST_PW_RESET);
-    // if (loading) return 'Requesting...';
-    // if (error) return `Request Error: ${error.message}`
+    const [addTodo, { data, loading, error }] = useMutation(REQUEST_PW_RESET);
+    if (loading) return 'Requesting...';
+    if (error) return `Request Error: ${error.message}`
 
     if (inputType === 'email') {
       setEmail(inputValue);
     }
+    
   };
 
 

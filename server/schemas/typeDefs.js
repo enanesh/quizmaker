@@ -69,7 +69,7 @@ const typeDefs = `#graphql
   type Mutation {
     addUser(username: String!, firstname: String!, lastname: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    requestPwReset(email: String): 
+    requestPwReset(email: String): PasswordReset
     createQuiz(title: String!, createdAt: String!, owner: [ID]!, question: [ID], student: [ID]): Quiz
     updateQuiz(_id: ID!, title: String, createdAt: String, owner: [ID], question: [ID], student: [ID]): Quiz
     createQuestion(questiontext: String!, answer: [String]!, correctanswer: [String]!, questiontype: String!): Question
