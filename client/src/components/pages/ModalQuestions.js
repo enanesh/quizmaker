@@ -210,7 +210,6 @@ export default function Modal(props) {
                       let count = 0;
                       for (let index = 0; index < questionsForms.length; index++) {
                         ++count;
-                        //console.log(document.getElementById(`question${count}`).value);
                         quiz.questions.push({
                           question_name: document.getElementById(`question${count}`).value,
                         });
