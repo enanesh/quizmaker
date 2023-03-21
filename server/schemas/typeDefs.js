@@ -51,21 +51,21 @@ const typeDefs = `#graphql
 
   type Query {
     users: [User]
-    getQuizById(quizId: ID!): Quiz!
-    getQuestionsByQuizId(quizId: ID!): Quiz!
+    getQuizById(quizId: ID!): Quiz
+    getQuestionsByQuizId(quizId: ID!): Quiz
     getAllQuizzes: [Quiz]
     getAllQuizzesByOwner(owernerId: ID!): [Quiz]!
     getAllQuizzesByStudent(studentId: ID!): [Quiz]!
     getAnswersByQuizId(quizId: ID!): [Answer!]!
     getMyProfile: User!
-    getUserByUserNameOrEmail(username: String!, email: String!): User!
+    getUserByUserNameOrEmail(username: String, email: String): User
   }
 
   type Mutation {
-    addUser(username: String!, firstname: String!, lastname: String!, email: String!, password: String!): Auth
+    addUser(username: String!, firstname: String, lastname: String, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    createQuiz(title: String!, createdAt: String!, owner: [ID]!, question: [ID], student: [ID]): Quiz
-    updateQuiz(_id: ID!, title: String, createdAt: String, owner: [ID], question: [ID], student: [ID]): Quiz
+    createQuiz(title: String!, createdAt: String!, owner: ID!, question: [ID], student: [ID]): Quiz
+    updateQuiz(_id: ID!, title: String, createdAt: String, owner: ID, question: [ID], student: [ID]): Quiz
     createQuestion(questiontext: String!, answer: [String]!, correctanswer: [String]!, questiontype: String!): Question
     updateQuestion(_id: ID!, questiontext: String, answer: [String], correctanswer: [String], questiontype: String): Question
     saveAnswer(questionId: ID!, userId: ID!, selectedanswer: [String]!, isCorrect: Boolean!): Answer
@@ -74,7 +74,7 @@ const typeDefs = `#graphql
   }
 `;
 
-
+// MR 3/20/23 do we need it here? can we keep it in utils folder?
 const dateScalar = new GraphQLScalarType({
   name: 'Date',
   description: 'Date custom scalar type',
