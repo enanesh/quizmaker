@@ -27,7 +27,7 @@ const options = [
     {
       id: 4,
       name: 'Assigned to you',
-      href: '/quizesfor/userId',
+      href: '/assigned/:userId',
       imageSrc: './todo.png',
       imageAlt: 'Assigned to you.',
     },
@@ -41,7 +41,7 @@ const options = [
       {
         id: 6,
         name: 'Logout',
-        href: '/logout',
+        href: '/',
         imageSrc: './logout.png',
         imageAlt: 'Logout',
       },

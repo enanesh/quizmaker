@@ -18,6 +18,7 @@ import PasswordForm from "./components/PasswordForm";
 import ProfileSettings from "./components/ProfileSettings";
 import ResetPassword from "./components/NewPassword";
 import NewPassword from "./components/NewPassword";
+import AssignedQuizzes from "./components/pages/AssignedQuizzes";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -56,6 +57,7 @@ function App() {
           <Route exact path='/password' element={<PasswordForm />} />
           <Route exact path='/settings' element={<ProfileSettings />} />
           <Route exact path='/newpassword/:resetLink' element={<NewPassword />} />
+          <Route exact path='/assigned/:userId' element={<AssignedQuizzes />} />
           {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
           <Route path="/build" element={<BuildQuiz />} />
         </Routes>
