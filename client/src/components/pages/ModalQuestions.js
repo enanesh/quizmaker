@@ -141,13 +141,6 @@ export default function Modal(props) {
               </li>
             </ul>
           </div>
-          <button
-            className="ml-3 my-1 bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-8"
-            type="button"
-            onClick={handleQuestionSubmit}
-          >
-            Add question
-          </button>
         </form>
       </>
     );
