@@ -1,18 +1,18 @@
 import React from 'react'
 
 const NewPassword = () => {
-    const [ password, setPassword ] = useState('');
-    const [ checkPassword, setCheckPassword ] = useState('');
+    // const [ password, setPassword ] = useState('');
+    // const [ checkPassword, setCheckPassword ] = useState('');
 
-    const handleInputChange = (e) => {
-        const { target } = e;
-        const inputType = target.name;
-        const inputValue = target.value;
+    // const handleInputChange = (e) => {
+    //     const { target } = e;
+    //     const inputType = target.name;
+    //     const inputValue = target.value;
     
-        if (inputType === 'email') {
-          setEmail(inputValue);
-        }
-      };
+    //     if (inputType === 'email') {
+    //       setEmail(inputValue);
+    //     }
+    //   };
   return (
       <section class="bg-gray-50 dark:bg-gray-900 bg-confetti ">
 
