@@ -1,8 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import TemporaryQuizCard from "../TemporaryQuizCard";
-import { ADD_QUESTION, CREATE_QUESTION } from "../../utils/mutations";
+import { ADD_QUESTION, ADD_ANSWER, ADD_QUIZ } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
+const uuid = require("../../utils/uuid");
+const quizId = uuid();
 
 export default function Modal(props) {
   const [questions, setQuestions] = useState([{}]);
@@ -15,7 +17,9 @@ export default function Modal(props) {
 
   let questionsList = [];
   let count = 0;
-  const [createQuestion] = useMutation(CREATE_QUESTION);
+  const [addQuiz] = useMutation(ADD_QUIZ);
+  const [addQuestion] = useMutation(ADD_QUESTION);
+  const [addAnswer] = useMutation(ADD_ANSWER);
 
   const [currentQuestionState, setCurrentQuestionState] = useState({
     question: "",
@@ -57,14 +61,30 @@ export default function Modal(props) {
     } else {
       typeMatch = "radiogroup";
     }
-    console.log(answerMatch);
-    console.log(typeMatch);
-    const mutationResponse = await createQuestion({
+
+    const quizMutation = await addQuiz({
       variables: {
+        quizId: quizId,
+        title: props.initInfo[2],
+      },
+    });
+
+    const questionId = uuid();
+
+    const questionMutation = await addQuestion({
+      variables: {
+        quizId: quizId,
+        questionId: questionId,
         questiontext: currentQuestionState.question,
-        answers: [currentQuestionState.option1, currentQuestionState.option2, currentQuestionState.option3, currentQuestionState.option4],
         correctanswer: answerMatch,
-        type: typeMatch,
+        questiontype: typeMatch,
+      },
+    });
+
+    const answerOneMutation = await addAnswer({
+      variables: {
+        questionId: questionId,
+        selectedanswer: currentQuestionState.option1,
       },
     });
   };
@@ -81,9 +101,9 @@ export default function Modal(props) {
 
           <div class="md:col-span-5 mx-2 mb-3">
             <div class="inline-flex items-center">
-              <input type="checkbox" name="multiple" id="multiple" class="form-checkbox" onChange={handleChange} />
+              <input type="checkbox" name="multiple" id={`multiple${count}`} class="form-checkbox" onChange={handleChange} />
               <label for="multiple" class="ml-2">
-                multiple choise
+                multiple choice
               </label>
             </div>
           </div>
@@ -110,6 +130,7 @@ export default function Modal(props) {
                     type="radio"
                     value="2"
                     name="listradio"
+                    onChange={handleChange}
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
                   <input type="text" name="option2" id={`option2-${count}`} class="m-1 h-7 border mt-1 rounded px-4 w-full bg-gray-50" onChange={handleChange} />
@@ -122,6 +143,7 @@ export default function Modal(props) {
                     type="radio"
                     value="3"
                     name="listradio"
+                    onChange={handleChange}
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
                   <input type="text" name="option3" id={`option3-${count}`} class="m-1 h-7 border mt-1 rounded px-4 w-full bg-gray-50" onChange={handleChange} />
@@ -134,6 +156,7 @@ export default function Modal(props) {
                     type="radio"
                     value="4"
                     name="listradio"
+                    onChange={handleChange}
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
                   <input type="text" name="option4" id={`option4-${count}`} class="m-1 h-7 border mt-1 rounded px-4 w-full bg-gray-50" onChange={handleChange} />
@@ -192,7 +215,7 @@ export default function Modal(props) {
                   >
                     Close
                   </button>
-                  <button
+                  {/* <button
                     className="ml-3 my-1 bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-8"
                     id={`saveQuestion${count}`}
                     type="button"
@@ -227,7 +250,7 @@ export default function Modal(props) {
                     }}
                   >
                     Save quiz
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

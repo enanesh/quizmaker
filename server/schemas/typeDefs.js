@@ -16,10 +16,12 @@ const typeDefs = `#graphql
   }
 
   type Quiz {
-    quizID: ID!
-    createdAt: String!
-    owner: String!
-    questions: Question!
+    quizId: String
+    title: String
+    createdAt: String
+    owner: String
+    questions: [Question]
+    student: [User]  
   }
 
   type QuizUser {
@@ -30,17 +32,20 @@ const typeDefs = `#graphql
   }
 
   type Question {
-    questiontext: String!
-    answers: [String!]!
-    correctAnswers: [String!]!
+    _id: ID
+    questionId: String
+    questiontext: String
+    answers: [String]
+    correctanswer: [String]
     questiontype: String
   }
 
   type Answer {
-    questionId: Question!
-    userId: User!
-    selectedanswer: [String!]!
-    isCorrect: Boolean!
+    _id: ID
+    questionId: String
+    userId: User
+    selectedanswer: String
+    isCorrect: Boolean
   }
 
   type Category {
@@ -56,6 +61,8 @@ const typeDefs = `#graphql
 
   type Query {
     users: [User]
+    questions: [Question]
+    answers: [Answer]
     getQuizById(quizId: ID!): Quiz
     getQuestionsByQuizId(quizId: ID!): Quiz
     getAllQuizzes: [Quiz]
@@ -77,6 +84,9 @@ const typeDefs = `#graphql
     saveAnswer(questionId: ID!, userId: ID!, selectedanswer: [String]!, isCorrect: Boolean!): Answer
     deleteQuiz(quizId: ID!): Quiz
     deleteQuestion(questionId: ID!): Question
+    addQuiz(quizId: String, title: String): Quiz
+    addQuestion(quizId: String, questionId: String, questiontext: String, questiontype: String, correctanswer: String, answers: String): Question
+    addAnswer(questionId: String, selectedanswer: String): Answer
   }
 `;
 
