@@ -135,21 +135,18 @@ const resolvers = {
 
     },
     resetPassword: async (parent, args, contextValue, info) => {
-      console.log(`\n\nAttempting Reset\n`)
-      console.log(`Args:\n${JSON.stringify(args)}`)
       let { resetLink, newPassword } = args;
 
       const resetRequest = await PasswordReset.findOne({ resetLink });
       if (resetRequest === null) {
         throw new Error("This link has expired")
       }
-      console.log(`\n\nReset Request:\n${JSON.stringify(resetRequest)}`)
 
       const requestedUser = await User.findOne({_id: resetRequest.user})
-      console.log(`\n\nUpdated User:\n${JSON.stringify(requestedUser)}`)
 
-      requestedUser.password =  newPassword
-      const updatedUser = await requestedUser.save()
+      requestedUser.password =  newPassword;
+      const updatedUser = await requestedUser.save();
+      await resetRequest.remove();
 
       return { user: requestedUser._id }
     },
