@@ -5,6 +5,10 @@ const { linkGenerator, theFerryman } = require("../utils")
 
 const resolvers = {
   Query: {
+    users: async () => {
+      return User.find();
+    },
+
     // find quiz by ID with all data
     // PROFILE/Quiz
     // PROFILE/Take a quiz: select quiz from the list
@@ -303,7 +307,7 @@ const resolvers = {
       }
       throw new Error("You need to be logged in!");
     },
-    addQuiz: async (parent, { quizId, title }, context) => {
+    addQuiz: async (parent, { quizId, title, description }, context) => {
       console.log(">>>>>>>>>>>>");
       console.log("quizId: ", quizId);
       console.log("title: ", title);
@@ -311,6 +315,7 @@ const resolvers = {
       return Quiz.create({
         quizId: quizId,
         title: title,
+        description: description
       });
     },
     addQuestion: async (parent, { quizId, questionId, questiontext, questiontype, correctanswer }, context) => {

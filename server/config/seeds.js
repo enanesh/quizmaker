@@ -20,6 +20,13 @@ db.once('open', async () => {
             lastname: "Ball",
             email: "user2@quizmaker.com",
             password: "54321"
+        },
+        {
+            username: "User",
+            firstname: "Anton",
+            lastname: "Meat",
+            email: "user3@quizmaker.com",
+            password: "54321"
         }
    ]);
 

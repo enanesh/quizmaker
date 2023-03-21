@@ -18,6 +18,7 @@ const typeDefs = `#graphql
   type Quiz {
     quizId: String
     title: String
+    description: String
     createdAt: String
     owner: String
     questions: [Question]
@@ -85,7 +86,7 @@ const typeDefs = `#graphql
     saveAnswer(questionId: ID!, userId: ID!, selectedanswer: [String]!, isCorrect: Boolean!): Answer
     deleteQuiz(quizId: ID!): Quiz
     deleteQuestion(questionId: ID!): Question
-    addQuiz(quizId: String, title: String): Quiz
+    addQuiz(quizId: String, title: String, owner: String, description: String): Quiz
     addQuestion(quizId: String, questionId: String, questiontext: String, questiontype: String, correctanswer: String, answers: String): Question
     addAnswer(questionId: String, selectedanswer: String): Answer
   }

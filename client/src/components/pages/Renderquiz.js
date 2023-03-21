@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
-
+import { useMutation, useQuery } from "@apollo/client";
 import ModalQuestions from "./ModalQuestions";
 import TemporaryQuizCard from "../TemporaryQuizCard"
+
+import { GET_ALL_USERS } from "../../utils/queries";
 
 
 
 const AppRenderquiz = () => {
+
+  const { loading, data, error } = useQuery(GET_ALL_USERS);
+  console.log("data --->", error);
+  const users = data?.users || [];
+
+  console.log("users --->", users);
   const [quizInitInfo, setQuizInitInfo] = useState([]);
 
   const uuid = require("../../utils/uuid");
@@ -47,20 +55,22 @@ const AppRenderquiz = () => {
       <label for="category" className="block text-gray-700 text-sm font-semibold mb-2">Select a category</label>
             <select id="category" className="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline h-10">
               <option value>Select a category</option>
-              <option value="Category 1">Category 1</option>
-              <option value="Category 2">Category 2</option>
-              <option value="Category 3">Category 3</option>
-              <option value="Category 4">Category 4</option>
+              <option value="Javascript">Javascript</option>
+              <option value="Javascript">React</option>
+              <option value="SQL">SQL</option>
+              <option value="HTML & CSS">HTML & CSS</option>
             </select>
           </div>
           <div className="mb-6 mt-6">
       <label for="user" className="block text-gray-700 text-sm font-semibold mb-2">Assign to</label>
             <select id="user" className="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline h-10">
               <option value>Select a user</option>
-              <option value="User 1">User 1</option>
-              <option value="User 2">User 2</option>
-              <option value="User 3">User 3</option>
-              <option value="User 4">User 4</option>
+              
+              {users.map((user) => {
+              return (
+                <option value={user.username}>{user.username}</option>
+              );
+            })}
             </select>
           </div>
           <div className="mb-6 mt-6">

@@ -66,6 +66,7 @@ export default function Modal(props) {
       variables: {
         quizId: quizId,
         title: props.initInfo[2],
+        description: quizCategory
       },
     });
 
