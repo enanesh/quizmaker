@@ -13,7 +13,7 @@ const resetSchema = new Schema({
 });
 
 
-const Quiz = model('Quiz', quizSchema);
+const PasswordReset = model('PasswordReset', resetSchema);
 
-module.exports = Quiz;
+module.exports = PasswordReset;
 

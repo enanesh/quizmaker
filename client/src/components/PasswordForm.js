@@ -4,6 +4,10 @@ import { gql, useMutation } from '@apollo/client';
 
 const PasswordForm = () => {
   const [ email, setEmail ] = useState('')
+  // Need to create Mutation before this goes live
+  // const [requestPwReset, { data, loading, error }] = useMutation(REQUEST_PW_RESET);
+  // if (loading) return 'Requesting...';
+  // if (error) return `Request Error: ${error.message}`
 
   const handleInputChange = (e) => {
     const { target } = e;
@@ -11,9 +15,9 @@ const PasswordForm = () => {
     const inputValue = target.value;
 
     // Need to create Mutation before this goes live
-    const [addTodo, { data, loading, error }] = useMutation(REQUEST_PW_RESET);
-    if (loading) return 'Requesting...';
-    if (error) return `Request Error: ${error.message}`
+    // const [addTodo, { data, loading, error }] = useMutation(REQUEST_PW_RESET);
+    // if (loading) return 'Requesting...';
+    // if (error) return `Request Error: ${error.message}`
 
     if (inputType === 'email') {
       setEmail(inputValue);
@@ -21,6 +25,14 @@ const PasswordForm = () => {
     
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    setEmail('');
+    // requestPwReset({email})
+    // requestPwReset({ variables: { email } });
+    
+  };
 
 
   return (
@@ -63,6 +75,7 @@ const PasswordForm = () => {
 
               <button
                 type="submit"
+                onClick={handleFormSubmit}
                 class="w-full text-white bg-blue-600 hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Get a New Password
