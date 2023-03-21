@@ -101,17 +101,18 @@ const resolvers = {
       const resetLink = linkGenerator();
       const { email } = args;
 
-      let user = await User.findOne({ email });
-      if (user === null) {
+      let requestedUser = await User.findOne({ email });
+      if (requestedUser === null) {
         throw new Error("Can't find user with that email!")
       }
-      user = {
-        name: `${user.firstname} ${user.lastname}`,
+
+      const user = {
+        name: `${requestedUser.firstname} ${requestedUser.lastname}`,
         email: email
       }
 
       const resetPwRequest = await PasswordReset.create({
-        user: user._id,
+        user: requestedUser._id,
         resetLink
       })
       if (!resetPwRequest) {
@@ -120,7 +121,7 @@ const resolvers = {
 
       await theFerryman(user, "password", resetLink);
 
-      return { message: "If user exists, request was emailed to them" }
+      return { user: requestedUser._id }
 
     },
     // PROFILE/Create a quiz (1)

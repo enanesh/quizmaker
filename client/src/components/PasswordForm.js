@@ -1,36 +1,39 @@
 import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client';
+import { REQUEST_PW_RESET } from "../utils/mutations";
 
 
 const PasswordForm = () => {
   const [ email, setEmail ] = useState('')
-  // Need to create Mutation before this goes live
-  // const [requestPwReset, { data, loading, error }] = useMutation(REQUEST_PW_RESET);
-  // if (loading) return 'Requesting...';
-  // if (error) return `Request Error: ${error.message}`
+  const [ message, setMessage ] = useState('')
+  const [requestPwReset, { data, loading, error }] = useMutation(REQUEST_PW_RESET);
+  
+  if (loading) return 'Requesting...';
+  if (error) return `Request Error: ${error.message}`
 
   const handleInputChange = (e) => {
     const { target } = e;
     const inputType = target.name;
     const inputValue = target.value;
 
-    // Need to create Mutation before this goes live
-    const [requestPwReset, { data, loading, error }] = useMutation(REQUEST_PW_RESET);
-    if (loading) return 'Requesting...';
-    if (error) return `Request Error: ${error.message}`
-
     if (inputType === 'email') {
       setEmail(inputValue);
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    setEmail('');
-    // requestPwReset({email})
-    // requestPwReset({ variables: { email } });
     
+    const mutationResponse = await requestPwReset({ variables: { "email": email } });
+    console.log(`\n\nResponse:\n${JSON.stringify(mutationResponse)}`)
+    if (mutationResponse.data.requestPwReset.user) {
+      setEmail('')
+      setMessage('Password Request Sent - Check Your Email')
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000);
+    }
   };
 
 
@@ -71,7 +74,11 @@ const PasswordForm = () => {
               </div>
 
 
-
+              {message && (
+            <div>
+              <p>{message}</p>
+            </div>
+          )}
               <button
                 type="submit"
                 onClick={handleFormSubmit}

@@ -42,6 +42,14 @@ export const LOGIN = gql`
   }
 `;
 
+export const REQUEST_PW_RESET = gql`
+  mutation Mutation($email: String) {
+  requestPwReset(email: $email) {
+    user
+  }
+}
+`
+
 // PROFILE/Create a quiz
 export const CREATE_QUIZ = gql`
   mutation createQuiz($quizData: QuizInput!) {
