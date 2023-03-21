@@ -1,5 +1,4 @@
 const nodemailer = require("nodemailer");
-require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
   service: "hotmail",
@@ -24,14 +23,11 @@ const theFerryman = function (user, messageType, customLink) {
   switch (messageType) {
     case "password":
       message.subject = "Password Reset Request";
-      message.html = `<pre>Hi ${user.name},\n\nForgot your password?\nWe received a request to reset the password for your account.\n\nTo reset your password, click on the link below:\n</pre>http://localhost:3001/user/updatepassword/${customLink}`;
+      message.html = `<pre>Hi ${user.name},\n\nForgot your password?\nWe received a request to reset the password for your account.\n\nTo reset your password, click on the link below:\n</pre>http://localhost:3001/newpassword/${customLink}`;
       break;
   }
   sendMail(message);
 };
-
-console.log(`\n\nEmail: ${JSON.stringify(process.env.EMAIL_ADDRESS)}`)
-console.log(`\n\nPassword: ${process.env.EMAIL_PASSWORD}`)
 
 module.exports = theFerryman;
 

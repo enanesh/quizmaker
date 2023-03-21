@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { gql, useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 const SignUp = () => {
   const [ username, setUsername ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
+
+  //MR 3/20/23
+  const [addUser, { error }] = useMutation(ADD_USER);
+
 
   const handleInputChange = (e) => {
     const { target } = e;
@@ -20,20 +26,32 @@ const SignUp = () => {
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     let user = { username, email, password}
     console.log(`User:\n${JSON.stringify(user)}`)
-    fetch('/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-    .then((res) => {
-      console.log(res);
-    })
+    // fetch('/graphql', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(user)
+    // })
+    // .then((res) => {
+    //   console.log(res);
+    // })
+
+    // MR 3/19/23
+    try {
+      const { data } = await addUser({
+        variables: { username, email, password }
+      });
+      
+      Auth.login(data.addUser.token);
+    } catch (err) {
+      console.error(err);
+    }
+
 
     setUsername('');
     setEmail('');
@@ -94,7 +112,7 @@ const SignUp = () => {
                 <div class="relative">
                   <button 
                   onClick={handleFormSubmit}
-                  class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500
+                  class="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500 dark:bg-blue-700
                   rounded-lg transition duration-200 hover:bg-purple-600 ease">Sign Up</button>
                 </div>
                 <p class="text-sm font-light text-gray-500 dark:text-gray-400">

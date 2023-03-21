@@ -12,7 +12,7 @@ export const ADD_QUESTION = gql`
 // 3/18
 // SIGN UP page
 export const ADD_USER = gql`
-mutation addUser($username: String!, $firstname: String!, $lastname: String!, $email: String!, $password: String!) {
+mutation addUser($username: String!, $firstname: String, $lastname: String, $email: String!, $password: String!) {
   addUser(username: $username, firstname: $firstname, lastname: $lastname, email: $email, password: $password) {
     token
     user {
@@ -41,6 +41,14 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const REQUEST_PW_RESET = gql`
+  mutation Mutation($email: String) {
+  requestPwReset(email: $email) {
+    user
+  }
+}
+`
 
 // PROFILE/Create a quiz
 export const CREATE_QUIZ = gql`
