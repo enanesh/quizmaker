@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import auth from "../utils/auth";
 
 const AppNavbar = () => {
+
+
+
     return (
 
         <nav class="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br px-2sm:px-4 py-2.5 rounded ">
@@ -20,15 +24,19 @@ const AppNavbar = () => {
                 </button>
                 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul class="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-md md:font-medium md:border-0">
-                        <li>
-                            <a href="/signup" className="block text-white py-2 pl-3 pr-4 text-white-700 rounded hover:bg-white-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-400 md:p-0 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-2xl md:dark:hover:bg-transparent">Sign up</a>
-                        </li>
-                        <li>
-                            <a href="/login" className="block text-white text-2xl py-2 pl-3 pr-4 text-white-700 rounded hover:bg-white-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-400 md:p-0 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
-                        </li>
-                        <li>
-                            <a href="/profile" className="block  text-white text-2xl py-2 pl-3 pr-4 text-white-700 rounded hover:bg-white-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-400 md:p-0 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">My profile</a>
-                        </li>
+                        {auth.loggedIn() ? 
+                            <li>
+                                <a href="/profile" className="block  text-white text-2xl py-2 pl-3 pr-4 text-white-700 rounded hover:bg-white-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-400 md:p-0 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">My profile</a>
+                            </li> :
+                            <><li>
+                                <a href="/signup" className="block text-white py-2 pl-3 pr-4 text-white-700 rounded hover:bg-white-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-400 md:p-0 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white text-2xl md:dark:hover:bg-transparent">Sign up</a>
+                            </li>
+                                <li>
+                                    <a href="/login" className="block text-white text-2xl py-2 pl-3 pr-4 text-white-700 rounded hover:bg-white-100 md:hover:bg-transparent md:border-0 md:hover:text-purple-400 md:p-0 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
+                                </li></>
+                            }
+                        
+
                     </ul>
                 </div>
             </div>

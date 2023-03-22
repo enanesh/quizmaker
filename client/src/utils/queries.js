@@ -1,11 +1,12 @@
 import { gql } from "@apollo/client";
 
 export const GET_ALL_USERS = gql`
-  query getAllUsers {
-    users {
-      username
+    query getAllUsers {
+      users {
+      _id
+        username
+      }
     }
-  }
 `;
 // PROFILE/Take a quiz: select quiz from the list
 export const GET_QUIZ_BY_ID = gql`
@@ -81,11 +82,14 @@ const GET_QUIZZES_BY_OWNER = gql`
 `;
 
 // PROFILE/Assigned to you
-const GET_ALL_QUIZZES_BY_STUDENT = gql`
-  query getAllQuizzesByStudent($studentid: ID!) {
-    getAllQuizzesByStudent(studentid: $studentid) {
-      _id
+export const GET_ALL_QUIZZES_BY_STUDENT = gql`
+  query getAllQuizzesByStudent {
+    getAllQuizzesByStudent {
+      quizId
       title
+      description
+      createdAt
+      owner
     }
   }
 `;

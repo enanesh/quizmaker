@@ -5,9 +5,20 @@ const { linkGenerator, theFerryman } = require("../utils");
 
 const resolvers = {
   Query: {
+
+     me: async (parent, args, context) => {
+            if (context.user) {
+                const userData = await User.findOne({ _id: context.user._id })
+                .select('-__v -password')
+                return userData;
+            }
+            throw new GraphQLError("Not login");
+        },
+
     users: async () => {
       return User.find();
     },
+
 
     // find quiz by ID with all data
     // PROFILE/Quiz
@@ -44,10 +55,10 @@ const resolvers = {
 
     // get all quizzes
     // PROFILE/Assigned to you
-    getAllQuizzesByStudent: async (parent, { studentId }) => {
-      const quizzes = await Quiz.find({ student: studentId });
+    getAllQuizzesByStudent: async (parent, args, context ) => {
+      const quizzes = await Quiz.find({  student: context.user._id });
       if (quizzes.length === 0) {
-        throw new Error(`No quizzes assigned to student with id ${studentId}`);
+        throw new Error(`No quizzes assigned to student with id `);
       }
       return quizzes;
     },
@@ -304,15 +315,18 @@ const resolvers = {
       }
       throw new Error("You need to be logged in!");
     },
-    addQuiz: async (parent, { quizId, title, description }, context) => {
+    addQuiz: async (parent, { quizId, title, description, student}, {user}) => {
       console.log(">>>>>>>>>>>>");
+      console.log("user", user);
       console.log("quizId: ", quizId);
       console.log("title: ", title);
-
+      console.log("student: ", student);
       return Quiz.create({
         quizId: quizId,
         title: title,
         description: description,
+        owner: user._id,
+        student: student
       });
     },
     addQuestion: async (parent, { quizId, questionId, questiontext, questiontype, correctanswer, answerOne, answerTwo, answerThree, answerFour }, context) => {

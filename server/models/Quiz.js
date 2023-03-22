@@ -32,12 +32,11 @@ const quizSchema = new Schema({
         ref: 'Question',
     },
   ],
-  student: [
+  student: 
     {
       type: Schema.Types.ObjectId,
     ref: 'User',
     },
-  ],
 });
 
 
