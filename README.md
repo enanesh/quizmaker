@@ -17,7 +17,7 @@
   
 
  
- This app was deployed using Heroku: https://immense-lowlands-26942.herokuapp.com/
+ This app was deployed using Heroku: 
 
 
 
