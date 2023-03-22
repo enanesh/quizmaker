@@ -6,7 +6,7 @@ import { ADD_QUESTION, ADD_QUIZ } from "../../utils/mutations";
 
 import { useMutation } from "@apollo/client";
 const uuid = require("../../utils/uuid");
-const quizId = uuid();
+// const quizId = uuid();
 
 export default function Modal(props) {
   const [questions, setQuestions] = useState([{}]);
@@ -64,20 +64,20 @@ export default function Modal(props) {
       typeMatch = "radiogroup";
     }
 
-    const quizMutation = await addQuiz({
-      variables: {
-        quizId: quizId,
-        title: props.initInfo[2],
-        description: quizCategory,
-        student: quizAssignedTo
-      },
-    });
+    // const quizMutation = await addQuiz({
+    //   variables: {
+    //     quizId: quizId,
+    //     title: props.initInfo[2],
+    //     description: quizCategory,
+    //     student: quizAssignedTo,
+    //   },
+    // });
 
     const questionId = uuid();
 
     const questionMutation = await addQuestion({
       variables: {
-        quizId: quizId,
+        quizId: props.quizId,
         questionId: questionId,
         questiontext: currentQuestionState.question,
         correctanswer: answerMatch,
