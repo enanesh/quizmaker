@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom';
 
 const AppProfile = () => {
   const [ ownerID, setOwnerID ] = useState('1');
-
   
   useEffect( () => {
     // Create query to setOwnerID. I think this can be done with Apollo Context and JWT
     const { data } = AuthService.getProfile();
     setOwnerID(data._id)
-  }, [])
+  }, []);
+
+  const handleLogout = async () => {
+    await AuthService.logout();
+  };
 
   const options = [
     {
@@ -42,19 +45,19 @@ const AppProfile = () => {
       imageAlt: 'Assigned to you.',
     },
     {
-        id: 5,
-        name: 'Profile settings',
-        href: '/settings',
-        imageSrc: './settings.png',
-        imageAlt: 'Settings',
-      },
-      {
-        id: 6,
-        name: 'Logout',
-        href: '/',
-        imageSrc: './logout.png',
-        imageAlt: 'Logout',
-      },
+      id: 5,
+      name: 'Profile settings',
+      href: '/settings',
+      imageSrc: './settings.png',
+      imageAlt: 'Settings',
+    },
+    {
+      id: 6,
+      name: 'Logout',
+      imageSrc: './logout.png',
+      imageAlt: 'Logout',
+      callBack: () => handleLogout(),
+    },
   ]
 
     return (
