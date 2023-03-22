@@ -304,18 +304,16 @@ const resolvers = {
       }
       throw new Error("You need to be logged in!");
     },
-    addQuiz: async (parent, { quizId, title, description, student }, {user}) => {
+    addQuiz: async (parent, { quizId, title, description}, {user}) => {
       console.log(">>>>>>>>>>>>");
       console.log("user", user);
       console.log("quizId: ", quizId);
       console.log("title: ", title);
-      console.log("student: ", student);
       return Quiz.create({
         quizId: quizId,
         title: title,
         description: description,
-        owner: user._id,
-        student: student
+        owner: user._id
       });
     },
     addQuestion: async (parent, { quizId, questionId, questiontext, questiontype, correctanswer }, context) => {

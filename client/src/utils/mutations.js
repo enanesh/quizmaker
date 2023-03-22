@@ -1,12 +1,11 @@
 import { gql } from "@apollo/client";
 
 export const ADD_QUIZ = gql`
-  mutation addQuiz($quizId: String, $title: String, $description: String, $student:String) {
-    addQuiz(quizId: $quizId, title: $title, description: $description, student: $student) {
+  mutation addQuiz($quizId: String, $title: String, $description: String) {
+    addQuiz(quizId: $quizId, title: $title, description: $description) {
       quizId
       title
       description
-      student
     }
   }
 `;
