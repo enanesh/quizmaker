@@ -29,6 +29,7 @@ QuizMaker aims to solve the problem of creating and managing quizzes. In traditi
 - [Installation](#installation)
 - [Credits](#credits)
 - [Technology Used](#technology-used)
+- [Credits](#credits)
 - [License](#license)
 
 
@@ -135,8 +136,12 @@ Here, you can add questions and answers for the quiz. To do this, follow these s
 
 
 
-## Contributing
-
+## Credits
+- Parker Mathis:https://github.com/markerpathis
+- Jamey Wicklund: https://github.com/TheBluWiz
+- Maksim Razuvaev:https://github.com/MaksimRazuvaev
+- Anton Krasnikov:https://github.com/kas500
+- Edna Gonzalez:https://github.com/enanesh
 
 
 ## License
