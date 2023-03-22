@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import AuthService from '../../utils/auth'
 import { Link } from 'react-router-dom';
 
+const AppProfile = () => {
+  const [ ownerID, setOwnerID ] = useState('1');
 
-const options = [
+  
+  useEffect( () => {
+    // Create query to setOwnerID. I think this can be done with Apollo Context and JWT
+    const { data } = AuthService.getProfile();
+    setOwnerID(data._id)
+  }, [])
+
+  const options = [
     {
       id: 1,
       name: 'Create a quiz',
@@ -20,14 +30,14 @@ const options = [
     {
       id: 3,
       name: 'Created by you',
-      href: '/quizes/userId',
+      href: `/myquizzes/${ownerID}`,
       imageSrc: './by_you.png',
       imageAlt: 'Created by you',
     },
     {
       id: 4,
       name: 'Assigned to you',
-      href: '/quizesfor/userId',
+      href: `/assigned/${ownerID}`,
       imageSrc: './todo.png',
       imageAlt: 'Assigned to you.',
     },
@@ -41,13 +51,12 @@ const options = [
       {
         id: 6,
         name: 'Logout',
-        href: '/logout',
+        href: '/',
         imageSrc: './logout.png',
         imageAlt: 'Logout',
       },
   ]
 
-const AppProfile = () => {
     return (
       <div>
         <div className='m-8 min-h-screen'>
