@@ -22,7 +22,7 @@ const typeDefs = `#graphql
     createdAt: String
     owner: String
     questions: [Question]
-    student: [User]  
+    student: String  
   }
 
   type QuizUser {
@@ -61,6 +61,7 @@ const typeDefs = `#graphql
   }
 
   type Query {
+    me: User
     users: [User]
     questions: [Question]
     answers: [Answer]
@@ -68,7 +69,7 @@ const typeDefs = `#graphql
     getQuestionsByQuizId(quizId: ID!): Quiz
     getAllQuizzes: [Quiz]
     getAllQuizzesByOwner(owernerId: ID!): [Quiz]!
-    getAllQuizzesByStudent(studentId: ID!): [Quiz]!
+    getAllQuizzesByStudent: [Quiz]!
     getAnswersByQuizId(quizId: ID!): [Answer!]!
     getMyProfile: User!
     getUserByUserNameOrEmail(username: String, email: String): User
@@ -86,7 +87,7 @@ const typeDefs = `#graphql
     saveAnswer(questionId: ID!, userId: ID!, selectedanswer: [String]!, isCorrect: Boolean!): Answer
     deleteQuiz(quizId: ID!): Quiz
     deleteQuestion(questionId: ID!): Question
-    addQuiz(quizId: String, title: String, owner: String, description: String): Quiz
+    addQuiz(quizId: String, title: String, owner: String, description: String, student: String): Quiz
     addQuestion(quizId: String, questionId: String, questiontext: String, questiontype: String, correctanswer: String, answers: String): Question
     addAnswer(questionId: String, selectedanswer: String): Answer
   }
