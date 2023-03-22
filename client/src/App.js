@@ -46,23 +46,24 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+      <Navbar />
       <Router>
-        <Navbar />
         <Routes>
-          <Route exact path='/' element={<Section />} />
-          <Route exact path='/quizes' element={<Quizes />} />
-          <Route exact path='/profile' element={<Profile />} />
-          <Route exact path='/renderquiz' element={<Renderquiz />} />
-          <Route exact path='/signup' element={<SignUp />} />
-          <Route exact path='/login' element={<Login />} />
-          <Route exact path='/password' element={<PasswordForm />} />
-          <Route exact path='/settings' element={<ProfileSettings />} />
-          <Route exact path='/newpassword/:resetLink' element={<NewPassword />} />
-          <Route exact path='/assigned/:userID' element={<AssignedQuizzes />} />
-          <Route exact path='/myquizzes/:userID' element={<CreatedQuizzes />} />
+          <Route path='/' element={<Section />} />
+          <Route path='/quizes' element={<Quizes />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/renderquiz' element={<Renderquiz />} />
+          <Route path='/signup' element={<SignUp />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/password' element={<PasswordForm />} />
+          <Route path='/settings' element={<ProfileSettings />} />
+          <Route path='/newpassword/:resetLink' element={<NewPassword />} />
+          <Route path='/assigned/:userID' element={<AssignedQuizzes />} />
+          <Route path='/myquizzes/:userID' element={<CreatedQuizzes />} />
           {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
           <Route path="/build" element={<BuildQuiz />} />
         </Routes>
+
         <Footer />
       </Router>
     </ApolloProvider>

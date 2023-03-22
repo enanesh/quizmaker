@@ -39,9 +39,7 @@ const resolvers = {
       const { userID } = args;
       console.log(userID)
       const quizzes = await Quiz.find({ owner: userID });
-      if (quizzes.length === 0) {
-        throw new Error(`No quizzes are owned by user ${owernerId}`);
-      }
+
       console.log(`\n\nQuizzes:\n${JSON.stringify(quizzes)}`)
       return quizzes;
     },
