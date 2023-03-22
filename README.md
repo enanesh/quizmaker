@@ -86,6 +86,7 @@ The project structure is organized as follows:
 To use the Full-Stack Quiz Maker, you will need to sign up for an account. Once you have signed up, you can access the application by logging in to your account. After logging in, you will be directed to your profile page where you can create a new quiz.
 
 **Creating a New Quiz**
+
 To create a new quiz, follow these steps:
 
 1.Open your profile page by clicking on your name or profile picture.
