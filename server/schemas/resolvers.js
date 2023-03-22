@@ -45,13 +45,15 @@ const resolvers = {
 
     // get all quizzes by Owner
     // PROFILE/Created by you
-    getAllQuizzesByOwner: async (parent, args, context, info) => {
-      console.log('Is this being called?')
-      const { userId } = args;
-      console.log(userId)
-      const quizzes = await Quiz.find({ owner: userId }).populate("questions");
-
-      console.log(`\n\nQuizzes:\n${JSON.stringify(quizzes)}`)
+    getAllQuizzesByOwner: async (parent, args, context) => {
+      // console.log('Is this being called?')
+      // const { userId } = args;
+      // console.log(userId)
+      const quizzes = await Quiz.find({ owner: context.user._id });
+      if (quizzes.length === 0) {
+        throw new Error(`No quizzes created by you `);
+      }
+      //console.log(`\n\nQuizzes:\n${JSON.stringify(quizzes)}`)
       return quizzes;
     },
 

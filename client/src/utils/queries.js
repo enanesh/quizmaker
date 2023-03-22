@@ -73,8 +73,8 @@ export const GET_ALL_QUIZZES = gql`
 
 // PROFILE/Created by you
 export const GET_QUIZZES_BY_OWNER = gql`
-query GetAllQuizzesByOwner($userId: ID!) {
-  getAllQuizzesByOwner(userId: $userId) {
+query getAllQuizzesByOwner {
+  getAllQuizzesByOwner {
     description
     createdAt
     owner

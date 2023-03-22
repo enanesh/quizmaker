@@ -72,8 +72,8 @@ const typeDefs = `#graphql
     getQuizById(quizId: ID!): Quiz
     getQuestionsByQuizId(quizId: ID!): Quiz
     getAllQuizzes: [Quiz]
-    getAllQuizzesByOwner(userId: ID!): [Quiz]!
-    getAllQuizzesByStudent(studentId: ID!): [Quiz]!
+    getAllQuizzesByOwner: [Quiz]!
+    getAllQuizzesByStudent: [Quiz]!
     getAnswersByQuizId(quizId: ID!): [Answer!]!
     getMyProfile: User!
     getUserByUserNameOrEmail(username: String, email: String): User
