@@ -10,26 +10,50 @@ export const ADD_QUIZ = gql`
   }
 `;
 export const ADD_QUESTION = gql`
-  mutation addQuestion($quizId: String, $questionId: String, $questiontext: String, $questiontype: String, $correctanswer: String) {
-    addQuestion(quizId: $quizId, questionId: $questionId, questiontext: $questiontext, questiontype: $questiontype, correctanswer: $correctanswer) {
+  mutation addQuestion(
+    $quizId: String
+    $questionId: String
+    $questiontext: String
+    $questiontype: String
+    $correctanswer: String
+    $answerOne: String
+    $answerTwo: String
+    $answerThree: String
+    $answerFour: String
+  ) {
+    addQuestion(
+      quizId: $quizId
+      questionId: $questionId
+      questiontext: $questiontext
+      questiontype: $questiontype
+      correctanswer: $correctanswer
+      answerOne: $answerOne
+      answerTwo: $answerTwo
+      answerThree: $answerThree
+      answerFour: $answerFour
+    ) {
       _id
       questionId
       questiontext
       questiontype
       correctanswer
+      answerOne
+      answerTwo
+      answerThree
+      answerFour
     }
   }
 `;
 
-export const ADD_ANSWER = gql`
-  mutation addAnswer($questionId: String, $selectedanswer: String) {
-    addAnswer(questionId: $questionId, selectedanswer: $selectedanswer) {
-      _id
-      questionId
-      selectedanswer
-    }
-  }
-`;
+// export const ADD_ANSWER = gql`
+//   mutation addAnswer($questionId: String, $selectedanswer: String) {
+//     addAnswer(questionId: $questionId, selectedanswer: $selectedanswer) {
+//       _id
+//       questionId
+//       selectedanswer
+//     }
+//   }
+// `;
 
 // 3/18
 // SIGN UP page

@@ -72,7 +72,7 @@ const AppProfile = () => {
                 </div>
                 </div>
             </div>
-          </div>
+          </div>``
         </div>
     //   </div>
     )
