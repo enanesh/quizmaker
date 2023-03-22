@@ -120,14 +120,17 @@ Here, you can add questions and answers for the quiz. To do this, follow these s
 
 ## Technology Used
 - JavaScript
-- Express node library
+- @apollo/server
 - nodemon
 - express
 - GraphQl
 - jsonwebtoken
 - mongoose
 - nodemon
-
+- nodemailer
+- survey-react-ui
+- react
+- tailwind
 
 
 
