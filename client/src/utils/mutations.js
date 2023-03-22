@@ -74,10 +74,10 @@ export const REQUEST_PW_RESET = gql`
 
 export const RESET_PASSWORD = gql`
   mutation resetPassword($resetLink: String!, $newPassword: String!) {
-  resetPassword(resetLink: $resetLink, newPassword: $newPassword) {
-    user
+    resetPassword(resetLink: $resetLink, newPassword: $newPassword) {
+      user
+    }
   }
-}
 `;
 
 // PROFILE/Create a quiz
