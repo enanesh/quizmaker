@@ -68,7 +68,7 @@ const AppRenderquiz = () => {
               
               {users.map((user) => {
               return (
-                <option value={user.username}>{user.username}</option>
+                <option value={user._id}>{user.username}</option>
               );
             })}
             </select>
