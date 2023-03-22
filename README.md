@@ -105,7 +105,10 @@ To create a new quiz, follow these steps:
 
 8.Adding Questions
 
-9.After clicking on the "Continue" button, a new modal will appear. Here, you can add questions and answers for the quiz. To do this, follow these steps:
+9.After clicking on the "Continue" button, a new modal will appear. 
+
+
+Here, you can add questions and answers for the quiz. To do this, follow these steps:
 
 1.-Type your question in the text field provided.
 
