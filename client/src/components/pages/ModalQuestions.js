@@ -1,7 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import TemporaryQuizCard from "../TemporaryQuizCard";
-import { ADD_QUESTION, ADD_ANSWER, ADD_QUIZ } from "../../utils/mutations";
+import { ADD_QUESTION, ADD_QUIZ } from "../../utils/mutations";
+// import { ADD_QUESTION, ADD_ANSWER, ADD_QUIZ } from "../../utils/mutations";
+
 import { useMutation } from "@apollo/client";
 const uuid = require("../../utils/uuid");
 const quizId = uuid();
@@ -19,7 +21,7 @@ export default function Modal(props) {
   let count = 0;
   const [addQuiz] = useMutation(ADD_QUIZ);
   const [addQuestion] = useMutation(ADD_QUESTION);
-  const [addAnswer] = useMutation(ADD_ANSWER);
+  // const [addAnswer] = useMutation(ADD_ANSWER);
 
   const [currentQuestionState, setCurrentQuestionState] = useState({
     question: "",
@@ -80,15 +82,37 @@ export default function Modal(props) {
         questiontext: currentQuestionState.question,
         correctanswer: answerMatch,
         questiontype: typeMatch,
+        answerOne: currentQuestionState.option1,
+        answerTwo: currentQuestionState.option2,
+        answerThree: currentQuestionState.option3,
+        answerFour: currentQuestionState.option4,
       },
     });
 
-    const answerOneMutation = await addAnswer({
-      variables: {
-        questionId: questionId,
-        selectedanswer: currentQuestionState.option1,
-      },
-    });
+    // const answerOneMutation = await addAnswer({
+    //   variables: {
+    //     questionId: questionId,
+    //     selectedanswer: currentQuestionState.option1,
+    //   },
+    // });
+    // const answerTwoMutation = await addAnswer({
+    //   variables: {
+    //     questionId: questionId,
+    //     selectedanswer: currentQuestionState.option2,
+    //   },
+    // });
+    // const answerThreeMutation = await addAnswer({
+    //   variables: {
+    //     questionId: questionId,
+    //     selectedanswer: currentQuestionState.option3,
+    //   },
+    // });
+    // const answerFourMutation = await addAnswer({
+    //   variables: {
+    //     questionId: questionId,
+    //     selectedanswer: currentQuestionState.option4,
+    //   },
+    // });
   };
 
   for (let index = 0; index < numOfQuestions; index++) {
