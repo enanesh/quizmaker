@@ -72,8 +72,8 @@ export const GET_ALL_QUIZZES = gql`
 `;
 
 // PROFILE/Created by you
-const GET_QUIZZES_BY_OWNER = gql`
-  query getQuizzesByOwner($ownerid: ID!) {
+export const GET_QUIZZES_BY_OWNER = gql`
+  query getAllQuizzesByOwner($ownerid: ID!) {
     getAllQuizzesByOwner(ownerid: $ownerid) {
       _id
       title

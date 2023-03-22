@@ -58,8 +58,8 @@ function App() {
           <Route exact path='/password' element={<PasswordForm />} />
           <Route exact path='/settings' element={<ProfileSettings />} />
           <Route exact path='/newpassword/:resetLink' element={<NewPassword />} />
-          <Route exact path='/assigned/:userId' element={<AssignedQuizzes />} />
-          <Route exact path='/myquizzes/:userId' element={<CreatedQuizzes />} />
+          <Route exact path='/assigned/:userID' element={<AssignedQuizzes />} />
+          <Route exact path='/myquizzes/:userID' element={<CreatedQuizzes />} />
           {/* <Route path="/quiz" element={<RenderQuiz />} /> */}
           <Route path="/build" element={<BuildQuiz />} />
         </Routes>
