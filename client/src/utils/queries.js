@@ -83,11 +83,14 @@ const GET_QUIZZES_BY_OWNER = gql`
 `;
 
 // PROFILE/Assigned to you
-const GET_ALL_QUIZZES_BY_STUDENT = gql`
-  query getAllQuizzesByStudent($studentid: ID!) {
-    getAllQuizzesByStudent(studentid: $studentid) {
-      _id
+export const GET_ALL_QUIZZES_BY_STUDENT = gql`
+  query getAllQuizzesByStudent {
+    getAllQuizzesByStudent {
+      quizId
       title
+      description
+      createdAt
+      owner
     }
   }
 `
