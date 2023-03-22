@@ -234,13 +234,14 @@ export default function Modal(props) {
 
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button
+                  <a
+                    href={`/profile`}
                     className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear  duration-150"
                     type="button"
                     onClick={() => setShowModal(false)}
                   >
-                    Close
-                  </button>
+                    Finish
+                  </a>
                   {/* <button
                     className="ml-3 my-1 bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-8"
                     id={`saveQuestion${count}`}
