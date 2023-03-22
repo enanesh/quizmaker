@@ -16,7 +16,7 @@
 // //   const [cards, setCards] = useState([]);
 
 // //   const addCard = () => {
-    
+
 // //     // create a new array with the old values and the new random one
 // //     const newCards = [...cards, Math.floor(Math.random() * 100)];
 
@@ -90,7 +90,7 @@
 //         </button>
 //         {/* {cards.map((cardNumber) => (
 //           <TemporaryQuizCard saveQuestion={saveQuestion} number={cardNumber} />
-          
+
 // //         ))}
 // //       </div>
 // //       <div class="flex w-full mt-8">

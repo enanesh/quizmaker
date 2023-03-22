@@ -1,36 +1,61 @@
 import { gql } from "@apollo/client";
 
 export const ADD_QUIZ = gql`
-mutation Mutation($quizId: String, $title: String, $owner: String, $description: String) {
-  addQuiz(quizId: $quizId, title: $title, owner: $owner, description: $description) {
+mutation Mutation($quizId: String, $title: String, $owner: String, $description: String, $student: String) {
+  addQuiz(quizId: $quizId, title: $title, owner: $owner, description: $description, student: $student) {
     quizId
     title
     description
     owner
+    student
   }
 }
 `;
 export const ADD_QUESTION = gql`
-  mutation addQuestion($quizId: String, $questionId: String, $questiontext: String, $questiontype: String, $correctanswer: String) {
-    addQuestion(quizId: $quizId, questionId: $questionId, questiontext: $questiontext, questiontype: $questiontype, correctanswer: $correctanswer) {
+  mutation addQuestion(
+    $quizId: String
+    $questionId: String
+    $questiontext: String
+    $questiontype: String
+    $correctanswer: String
+    $answerOne: String
+    $answerTwo: String
+    $answerThree: String
+    $answerFour: String
+  ) {
+    addQuestion(
+      quizId: $quizId
+      questionId: $questionId
+      questiontext: $questiontext
+      questiontype: $questiontype
+      correctanswer: $correctanswer
+      answerOne: $answerOne
+      answerTwo: $answerTwo
+      answerThree: $answerThree
+      answerFour: $answerFour
+    ) {
       _id
       questionId
       questiontext
       questiontype
       correctanswer
+      answerOne
+      answerTwo
+      answerThree
+      answerFour
     }
   }
 `;
 
-export const ADD_ANSWER = gql`
-  mutation addAnswer($questionId: String, $selectedanswer: String) {
-    addAnswer(questionId: $questionId, selectedanswer: $selectedanswer) {
-      _id
-      questionId
-      selectedanswer
-    }
-  }
-`;
+// export const ADD_ANSWER = gql`
+//   mutation addAnswer($questionId: String, $selectedanswer: String) {
+//     addAnswer(questionId: $questionId, selectedanswer: $selectedanswer) {
+//       _id
+//       questionId
+//       selectedanswer
+//     }
+//   }
+// `;
 
 // 3/18
 // SIGN UP page

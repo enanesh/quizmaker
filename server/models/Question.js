@@ -17,11 +17,22 @@ const questionSchema = new Schema({
   },
   answers: [
     {
-      type: String,
-      //   required: true,
-      trim: true,
+      type: Schema.Types.ObjectId,
+      ref: "Answer",
     },
   ],
+  answerOne: {
+    type: String,
+  },
+  answerTwo: {
+    type: String,
+  },
+  answerThree: {
+    type: String,
+  },
+  answerFour: {
+    type: String,
+  },
   correctanswer: [
     {
       type: String,

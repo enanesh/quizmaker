@@ -1,38 +1,39 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_ALL_USERS = gql`
     query getAllUsers {
       users {
+      _id
         username
       }
     }
 `;
 // PROFILE/Take a quiz: select quiz from the list
-const GET_QUIZ_BY_ID = gql`
+export const GET_QUIZ_BY_ID = gql`
   query GetQuizById($quizId: ID!) {
     getQuizById(quizid: $quizId) {
-        _id
-        title
-        owner {
+      _id
+      title
+      owner {
         _id
         username
-        }
-        question {
+      }
+      question {
         _id
         questiontext
         answer {
-            _id
-            answerText
+          _id
+          answerText
         }
         correctanswer
         questiontype
         questionname
         isrequired
-        }
-        student {
+      }
+      student {
         _id
         username
-        }
+      }
     }
   }
 `;
@@ -57,18 +58,17 @@ const GET_QUESTIONS_BY_QUIZID = gql`
 // DASHBOARD: Map first 6 quizes to display in feeder
 export const GET_ALL_QUIZZES = gql`
   query getAllQuizzes {
-  getAllQuizzes {
-    quizId
-    title
-    description
-    createdAt
-    owner
-    questions {
-      questionId
+    getAllQuizzes {
+      quizId
+      title
+      description
+      createdAt
+      owner
+      questions {
+        questionId
+      }
     }
-
   }
-}
 `;
 
 // PROFILE/Created by you
@@ -85,14 +85,17 @@ query GetAllQuizzesByOwner($userId: ID!) {
 `;
 
 // PROFILE/Assigned to you
-const GET_ALL_QUIZZES_BY_STUDENT = gql`
-  query getAllQuizzesByStudent($studentid: ID!) {
-    getAllQuizzesByStudent(studentid: $studentid) {
-      _id
+export const GET_ALL_QUIZZES_BY_STUDENT = gql`
+  query getAllQuizzesByStudent {
+    getAllQuizzesByStudent {
+      quizId
       title
+      description
+      createdAt
+      owner
     }
   }
-`
+`;
 // Get answers to display
 const GET_ANSWERS_BY_QUIZ_ID = gql`
   query GetAnswersByQuizId($quizId: ID!) {
@@ -113,6 +116,35 @@ const GET_ANSWERS_BY_QUIZ_ID = gql`
         _id
         username
       }
+    }
+  }
+`;
+export const GET_SINGLE_QUIZ = gql`
+  query getSingleQuiz($quizId: String) {
+    getSingleQuiz(quizId: $quizId) {
+      createdAt
+      questions {
+        _id
+        questionId
+        questiontext
+        questiontype
+        answerOne
+        answerTwo
+        answerThree
+        answerFour
+        correctanswer
+      }
+      title
+      quizId
+    }
+  }
+`;
+export const GET_QUIZ_ANSWERS = gql`
+  query getQuizAnswers($questionId: String) {
+    getQuizAnswers(questionId: $questionId) {
+      _id
+      questionId
+      selectedanswer
     }
   }
 `;

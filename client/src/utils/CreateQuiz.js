@@ -1,6 +1,6 @@
 let surveyJson = "";
 
-function CreateQuiz() {
+function TestQuiz() {
   let userInput = [
     {
       elements: [
@@ -43,4 +43,4 @@ function CreateQuiz() {
   return surveyJson;
 }
 
-module.exports = CreateQuiz;
+module.exports = TestQuiz;

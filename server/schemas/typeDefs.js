@@ -1,4 +1,4 @@
-const { GraphQLScalarType, Kind } = require('graphql');
+const { GraphQLScalarType, Kind } = require("graphql");
 
 const typeDefs = `#graphql
   type User {
@@ -22,7 +22,7 @@ const typeDefs = `#graphql
     createdAt: String
     owner: String
     questions: [Question]
-    student: [User]  
+    student: String  
   }
 
   type QuizUser {
@@ -36,9 +36,13 @@ const typeDefs = `#graphql
     _id: ID
     questionId: String
     questiontext: String
-    answers: [String]
+    answers: [Answer]
     correctanswer: [String]
     questiontype: String
+    answerOne: String
+    answerTwo: String
+    answerThree: String
+    answerFour: String
   }
 
   type Answer {
@@ -61,6 +65,7 @@ const typeDefs = `#graphql
   }
 
   type Query {
+    me: User
     users: [User]
     questions: [Question]
     answers: [Answer]
@@ -72,6 +77,9 @@ const typeDefs = `#graphql
     getAnswersByQuizId(quizId: ID!): [Answer!]!
     getMyProfile: User!
     getUserByUserNameOrEmail(username: String, email: String): User
+    getSingleQuiz(quizId: String): Quiz
+    getQuizQuestions(questionId: String): Question
+    getQuizAnswers(questionId: String): [Answer]
   }
 
   type Mutation {
@@ -86,8 +94,8 @@ const typeDefs = `#graphql
     saveAnswer(questionId: ID!, userId: ID!, selectedanswer: [String]!, isCorrect: Boolean!): Answer
     deleteQuiz(quizId: ID!): Quiz
     deleteQuestion(questionId: ID!): Question
-    addQuiz(quizId: String, title: String, owner: String, description: String): Quiz
-    addQuestion(quizId: String, questionId: String, questiontext: String, questiontype: String, correctanswer: String, answers: String): Question
+    addQuiz(quizId: String, title: String, owner: String, description: String, student: String): Quiz
+    addQuestion(quizId: String, questionId: String, questiontext: String, questiontype: String, correctanswer: String, answerOne: String, answerTwo: String, answerThree: String, answerFour: String, answers: String): Question
     addAnswer(questionId: String, selectedanswer: String): Answer
   }
 `;
@@ -95,19 +103,19 @@ const typeDefs = `#graphql
 // MR 3/20/23 do we need it here? can we keep it in utils folder?
 // We will activate this code if we decide to add Date as a scalar type later.
 const dateScalar = new GraphQLScalarType({
-  name: 'Date',
-  description: 'Date custom scalar type',
+  name: "Date",
+  description: "Date custom scalar type",
   serialize(value) {
     if (value instanceof Date) {
       return value.getTime(); // Convert outgoing Date to integer for JSON
     }
-    throw Error('GraphQL Date Scalar serializer expected a `Date` object');
+    throw Error("GraphQL Date Scalar serializer expected a `Date` object");
   },
   parseValue(value) {
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       return new Date(value); // Convert incoming integer to Date
     }
-    throw new Error('GraphQL Date Scalar parser expected a `number`');
+    throw new Error("GraphQL Date Scalar parser expected a `number`");
   },
   parseLiteral(ast) {
     if (ast.kind === Kind.INT) {
