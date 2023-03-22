@@ -117,11 +117,6 @@ Here, you can add questions and answers for the quiz. To do this, follow these s
 
 3.- Click on the "Save Quiz" button to save your quiz.
 
-## Credits
-
-- Node.js  https://www.stanleyulili.com/node/node-modules-import-and-use-functions-from-another-file/
-- Express: https://expressjs.com/
-- nodemon: https://www.npmjs.com/package/nodemon
 
 ## Technology Used
 - JavaScript
