@@ -36,9 +36,9 @@ const resolvers = {
     // PROFILE/Created by you
     getAllQuizzesByOwner: async (parent, args, context, info) => {
       console.log('Is this being called?')
-      const { userID } = args;
-      console.log(userID)
-      const quizzes = await Quiz.find({ owner: userID });
+      const { userId } = args;
+      console.log(userId)
+      const quizzes = await Quiz.find({ owner: userId }).populate("questions");
 
       console.log(`\n\nQuizzes:\n${JSON.stringify(quizzes)}`)
       return quizzes;
@@ -306,16 +306,22 @@ const resolvers = {
       }
       throw new Error("You need to be logged in!");
     },
-    addQuiz: async (parent, { quizId, title, description }, context) => {
-      console.log(">>>>>>>>>>>>");
-      console.log("quizId: ", quizId);
-      console.log("title: ", title);
+    addQuiz: async (parent, args, context) => {
+      const { quizId, title, description, owner } = args;
+      // console.log(">>>>>>>>>>>>");
+      // console.log("quizId: ", quizId);
+      // console.log("title: ", title);
+      console.log(`\n\nOwner:\n${owner}`)
 
-      return Quiz.create({
+      const newQuiz = await Quiz.create({
         quizId: quizId,
         title: title,
-        description: description
+        description: description,
+        owner: owner
       });
+
+      console.log(`\n\nQuiz:\n${JSON.stringify(newQuiz)}`)
+      return newQuiz
     },
     addQuestion: async (parent, { quizId, questionId, questiontext, questiontype, correctanswer }, context) => {
       console.log("!!!!!!!!!!!");

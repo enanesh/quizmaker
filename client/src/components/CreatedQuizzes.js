@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_QUIZZES_BY_OWNER } from '../utils/queries'
 import { useNavigate, useParams } from "react-router-dom";
 
 const CreatedQuizzes = () => {
     const { userID } = useParams();
-    console.log(userID)
-    const { loading, data } = useQuery(GET_QUIZZES_BY_OWNER, {
+    const [userQuizzes, setUserQuizes] = useState([])
+    // set refetch interval to update this periodically
+    let { loading, data } = useQuery(GET_QUIZZES_BY_OWNER, {
         variables: { userID },
-      });
-    console.log(`\n\nData:\n${JSON.stringify(data)}`)
+    });
+
+    useEffect(() => {
+        setUserQuizes(data)
+        console.log(`User Quizzes:\n${userQuizzes}`)
+    }, [data])
 
     if (loading) {
         return <p>The data is loading</p>

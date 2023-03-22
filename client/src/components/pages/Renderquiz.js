@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_QUIZ } from "../../utils/mutations";
+import AuthService from '../../utils/auth'
 
 import ModalQuestions from "./ModalQuestions";
 import TemporaryQuizCard from "../TemporaryQuizCard";
@@ -18,12 +19,20 @@ const AppRenderquiz = () => {
   const [currentQuizIdState, setCurrentQuizIdState] = useState("");
   const uuid = require("../../utils/uuid");
 
+  const authData = AuthService.getProfile();
+  const owner = authData.data._id
+  console.log(`\n\nOwner:\n${owner}`)
+
+
   const handleContinue = async () => {
+
+
     const quizMutation = await addQuiz({
       variables: {
         quizId: uuid(),
         title: document.getElementById("title").value,
         description: document.getElementById("category").value,
+        owner: owner
       },
     });
     setCurrentQuizIdState(quizMutation.data.addQuiz.quizId);
