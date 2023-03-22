@@ -26,11 +26,25 @@ function TakeQuiz() {
     title: "Quiz Title",
     pages: [{}],
   };
+  surveyId = surveyJson.surveyId;
+  respondentId = surveyJson.respondentId;
+  authorId = surveyJson.authorId;
+  const alertResults = useCallback((sender) => {
+    const results = JSON.stringify(sender.data);
+    alert(results);
+    console.log(results);
+    handleQuizSubmit(sender.data, surveyId, respondentId, authorId);
+  }, []);
+
   // const { quizId } = useParams();
   const { data } = useQuery(GET_SINGLE_QUIZ, {
     variables: { quizId: quizId },
   });
-  const quizData = data?.getSingleQuiz || [];
+  const quizData = data?.getSingleQuiz || {};
+
+  if (!quizData || !quizData.questions) {
+    return <p>loading...</p>;
+  }
 
   for (var i = 0; i < quizData.questions.length; i++) {
     var inputFormat = {
@@ -49,15 +63,6 @@ function TakeQuiz() {
   }
 
   const survey = new Model(surveyJson);
-  surveyId = surveyJson.surveyId;
-  respondentId = surveyJson.respondentId;
-  authorId = surveyJson.authorId;
-  const alertResults = useCallback((sender) => {
-    const results = JSON.stringify(sender.data);
-    alert(results);
-    console.log(results);
-    handleQuizSubmit(sender.data, surveyId, respondentId, authorId);
-  }, []);
 
   survey.onComplete.add(alertResults);
 
