@@ -12,7 +12,6 @@ import { Survey } from "survey-react-ui";
 let surveyJson = "";
 
 const quizId = window.location.toString().split("/")[window.location.toString().split("/").length - 1];
-console.log(quizId);
 
 let surveyId = "";
 let respondentId = "";
@@ -23,18 +22,13 @@ function TakeQuiz() {
     surveyId: "222222",
     authorId: "555555",
     respondentId: "555555",
-    title: "Quiz Title",
+    title: "",
     pages: [{}],
   };
+
   surveyId = surveyJson.surveyId;
   respondentId = surveyJson.respondentId;
   authorId = surveyJson.authorId;
-  const alertResults = useCallback((sender) => {
-    const results = JSON.stringify(sender.data);
-    alert(results);
-    console.log(results);
-    handleQuizSubmit(sender.data, surveyId, respondentId, authorId);
-  }, []);
 
   // const { quizId } = useParams();
   const { data } = useQuery(GET_SINGLE_QUIZ, {
@@ -46,12 +40,18 @@ function TakeQuiz() {
     return <p>loading...</p>;
   }
 
+  const alertResults = (sender) => {
+    const results = JSON.stringify(sender.data);
+    // alert(results);
+    handleQuizSubmit(sender.data, quizData);
+  };
+
   for (var i = 0; i < quizData.questions.length; i++) {
     var inputFormat = {
       elements: [
         {
           type: quizData.questions[i].questiontype,
-          name: `question-${i}`,
+          name: `question${i}`,
           title: quizData.questions[i].questiontext,
           isRequired: true,
           choices: [quizData.questions[i].answerOne, quizData.questions[i].answerTwo, quizData.questions[i].answerThree, quizData.questions[i].answerFour],
@@ -62,18 +62,30 @@ function TakeQuiz() {
     surveyJson.pages.push(inputFormat);
   }
 
+  surveyJson.title = quizData.title;
+
   const survey = new Model(surveyJson);
 
   survey.onComplete.add(alertResults);
 
+  const handleQuizSubmit = async (data, quizData) => {
+    const questionBase = quizData.questions.length;
+    const enteredAnswers = Object.values(data);
+    let countCorrect = 0;
+    for (var i = 0; i < questionBase; i++) {
+      if (quizData.questions[i].correctanswer[0] == enteredAnswers[i]) {
+        countCorrect++;
+      }
+    }
+    let score = 0;
+
+    score = parseInt(countCorrect) / parseInt(questionBase);
+
+    alert("You scored " + score * 100 + "%");
+
+    return score;
+  };
   return <Survey model={survey} />;
 }
-
-const handleQuizSubmit = async (data, surveyId, respondentId, authorId) => {
-  console.log(data);
-  console.log(surveyId);
-  console.log(respondentId);
-  console.log(authorId);
-};
 
 export default TakeQuiz;
