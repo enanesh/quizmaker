@@ -16,7 +16,7 @@ const AppNavbar = () => {
 
   return (
     <nav className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br px-2sm:px-4 py-2.5 rounded ">
-      <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+      <div className="justify-between px-12 mx-auto lg:max-w-8xl md:items-center md:flex md:px-14">
         <div>
           <div className="flex  justify-between py-3 md:py-5">
             <div href="/" className="flex items-center">

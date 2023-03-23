@@ -10,7 +10,7 @@ const AppSection = () => {
 
                         <div>
                     <h2 className="text-3xl font-main tracking-tight text-gray-800 sm:text-6xl">Challenge your mind,</h2>
-                    <h3 className="text-3xl font-main tracking-tight text-gray-800 sm:text-4xl">unlock your knowledge</h3>
+                    <h3 className="text-3xl font-main tracking-tight text-gray-800 sm:text-4xl">unlock your knowledge.</h3>
                             {/* <p className="mt-4 text-gray-500">The walnut wood card tray is precision milled to perfectly fit a stack of Focus cards. The powder coated steel divider separates active cards from new ones, or can be used to archive important task lists.</p> */}
 
                     <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
