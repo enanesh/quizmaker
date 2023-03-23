@@ -27,6 +27,7 @@ QuizMaker aims to solve the problem of creating and managing quizzes. In traditi
 - [User Story](#user-story)
 - [Screenshots](#screenshots)
 - [Installation](#installation)
+- [Usage](#usage)
 - [Credits](#credits)
 - [Technology Used](#technology-used)
 - [Credits](#credits)
