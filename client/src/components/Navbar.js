@@ -7,9 +7,18 @@ const AppNavbar = () => {
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
 
+  const logout = () => {
+    // clear authentication state
+    // for example: set a flag in local storage or cookies
+    localStorage.removeItem('id_token');
+    // redirect to login page
+    window.location.href = '/';
+  }
+
+
   return (
     <nav className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br px-2sm:px-4 py-2.5 rounded ">
-      <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+      <div className="justify-between px-12 mx-auto lg:max-w-8xl md:items-center md:flex md:px-14">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
             <div className="flex items-center">
@@ -23,15 +32,18 @@ const AppNavbar = () => {
               </ul>
               <img src="./logo1.png" className="h-6 mr-3 sm:h-12 " alt="Logo" />
             </div>
-            <div className="md:hidden">
+            <div className="md:hidden pt-4">
               <button
-                className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                className="p-2  text-white rounded-md outline-none focus:border-gray-400 focus:border"
                 onClick={() => setNavbar(!navbar)}
               >
+
+
+
                 {navbar ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6"
+                    className="w-12 h-12"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -44,7 +56,7 @@ const AppNavbar = () => {
                 ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6"
+                    className="w-12 h-12"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -62,7 +74,11 @@ const AppNavbar = () => {
           </div>
         </div>
         <div>
+
+          
           <div
+            className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
+              }`}
             className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"
               }`}
           >
