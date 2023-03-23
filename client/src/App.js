@@ -2,7 +2,7 @@
 //import './index.css';
 import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SignUp from "./components/SignUp";
 import Section from "./components/pages/Section";
@@ -46,11 +46,12 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <Navbar />
+    <ApolloProvider client={client}>      
+
       <Router>
+      <Navbar />
         <Routes>
-          <Route exact path="/" element={<Section />} />
+          <Route path="/" element={<Section />} />
           <Route exact path="/quizes" element={<Quizes />} />
           <Route exact path="/profile" element={<Profile />} />
           <Route exact path="/renderquiz" element={<Renderquiz />} />
