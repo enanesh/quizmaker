@@ -14,7 +14,7 @@
   
 QuizMaker is a coding project aimed at creating a user-friendly quiz generator that allows users to create and customize quizzes for a variety of purposes. The program is designed to be intuitive and easy to use, featuring a clean and simple interface that enables users to quickly create quizzes with different question types. 
  
- This app was deployed using Heroku: 
+ This app was deployed using Heroku: https://quizmaker-app.herokuapp.com/
 
  ## User Story
  
@@ -27,6 +27,7 @@ QuizMaker aims to solve the problem of creating and managing quizzes. In traditi
 - [User Story](#user-story)
 - [Screenshots](#screenshots)
 - [Installation](#installation)
+- [Usage](#usage)
 - [Credits](#credits)
 - [Technology Used](#technology-used)
 - [Credits](#credits)
