@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import AuthService from '../../utils/auth'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AppProfile = () => {
   const [ ownerID, setOwnerID ] = useState('1');
-  
+  const navigate = useNavigate();
   useEffect( () => {
     // Create query to setOwnerID. I think this can be done with Apollo Context and JWT
     const { data } = AuthService.getProfile();
@@ -22,6 +23,7 @@ const AppProfile = () => {
       href: '/renderquiz',
       imageSrc: './create.png',
       imageAlt: 'Create a quiz',
+      callBack: () => navigate('/renderquiz'),
     },
     {
       id: 2,
@@ -29,6 +31,7 @@ const AppProfile = () => {
       href: '/quizes',
       imageSrc: './take.png',
       imageAlt: 'Take a quiz',
+      callBack: () => navigate('/quizes'),
     },
     {
       id: 3,
@@ -36,6 +39,7 @@ const AppProfile = () => {
       href: `/myquizzes/${ownerID}`,
       imageSrc: './by_you.png',
       imageAlt: 'Created by you',
+      callBack: () => navigate(`/myquizzes/${ownerID}`),
     },
     {
       id: 4,
@@ -43,6 +47,7 @@ const AppProfile = () => {
       href: `/assigned/${ownerID}`,
       imageSrc: './todo.png',
       imageAlt: 'Assigned to you.',
+      callBack: () => navigate(`/assigned/${ownerID}`),
     },
     {
       id: 5,
@@ -50,6 +55,7 @@ const AppProfile = () => {
       href: '/settings',
       imageSrc: './settings.png',
       imageAlt: 'Settings',
+      callBack: () => navigate('/settings'),
     },
     {
       id: 6,
@@ -69,7 +75,7 @@ const AppProfile = () => {
                     <h2 className="sr-only">options</h2>
                     <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 xl:gap-x-8">
                     {options.map((product) => (
-                        <a key={product.id} href={product.href} className="group">
+                        <div key={product.id} href={product.href} className="group" onClick={product.callBack}>
                         <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg xl:aspect-w-8 xl:aspect-h-8">
                             <img
                             src={product.imageSrc}
@@ -78,7 +84,7 @@ const AppProfile = () => {
                             />
                         </div>
                         <h3 className="mt-4 text-sm text-center text-gray-700">{product.name}</h3>
-                        </a>
+                        </div>
                     ))}
                     </div>
                 </div>
