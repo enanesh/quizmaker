@@ -8,6 +8,7 @@ module.exports = {
       },
       fontFamily: {
         signature: ["Caveat"],
+        main:["Roboto"]
       }
      
 
