@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_QUIZ } from "../../utils/mutations";
-import AuthService from '../../utils/auth'
+import AuthService from "../../utils/auth";
 
 import ModalQuestions from "./ModalQuestions";
 import TemporaryQuizCard from "../TemporaryQuizCard";
@@ -20,19 +20,17 @@ const AppRenderquiz = () => {
   const uuid = require("../../utils/uuid");
 
   const authData = AuthService.getProfile();
-  const owner = authData.data._id
-  console.log(`\n\nOwner:\n${owner}`)
-
+  const owner = authData.data._id;
+  console.log(`\n\nOwner:\n${owner}`);
 
   const handleContinue = async () => {
-
-
     const quizMutation = await addQuiz({
       variables: {
         quizId: uuid(),
         title: document.getElementById("title").value,
         description: document.getElementById("category").value,
-        owner: owner
+        owner: owner,
+        student: document.getElementById("user").value,
       },
     });
     setCurrentQuizIdState(quizMutation.data.addQuiz.quizId);
@@ -84,10 +82,8 @@ const AppRenderquiz = () => {
               <option value>Select a user</option>
 
               {users.map((user) => {
-              return (
-                <option value={user._id}>{user.username}</option>
-              );
-            })}
+                return <option value={user._id}>{user.username}</option>;
+              })}
             </select>
           </div>
           <div className="mb-6 mt-6">
