@@ -38,10 +38,22 @@ QuizMaker aims to solve the problem of creating and managing quizzes. In traditi
 
 ## Screenshots
 
-
-
-
-
+- Main PAge: 
+- ![Main Page](/client/assets/MainPage.PNG)
+- Login Page:
+- ![Login Page](/client/assets/LoginPage.PNG)
+- Signup Page:
+- ![Signup Page](/client/assets/SignUpPage.PNG)
+- Profile Page:
+- ![Profile Page](/client/assets/ProfilePage.PNG)
+- Create Quiz Page:
+- ![Create Quiz Page](/client/assets/CreateQuizPage.PNG)
+- Select Quiz Page:
+- ![Select Quiz Page](/client/assets/SelectQuizPage.PNG)
+- Quiz Created By Me Page:
+- ![Quiz Created By Me Page](/client/assets/QuizCreatedByMePage.PNG)
+- Profile Settings:
+- ![Profile Settings](/client/assets/ProfileSettings.PNG)
 
 ## Installation
 
